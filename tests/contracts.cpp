@@ -1,8 +1,8 @@
-#include <iiImageCodec/ImageCodec.h>
+#include <iiVisualCodec/ImageCodec.h>
 #include <cstdlib>
 #include <iostream>
 #include <limits>
-using namespace ii::image;
+using namespace ii::visual::image;
 #define CHECK(x) do { if (!(x)) { std::cerr << __LINE__ << ": " #x "\n"; std::exit(1); } } while(false)
 int main() {
     // An RGB row has padding; the encoder must not serialize it as pixels.

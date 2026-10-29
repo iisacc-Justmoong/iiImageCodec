@@ -1,0 +1,335 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:69a5e05e64a2a9526cb093571d270462d423b5922bb9ffd0fde473cff8d4bf98",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/VisionAI.md",
+    "sha256": "f30ccd31e0c069002379720edeb09c52d48ae304228b105ab6be171157f5d4b6",
+    "bytes": 4596,
+    "line_count": 29,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "Vision AI 객체와 처리 계약",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# Vision AI 객체와 처리 계약\n",
+      "level": 1,
+      "title": "Vision AI 객체와 처리 계약"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "`iiVisualCodec::Vision`과 `Vision.h`는 C++23 표준 타입으로 영상·검출·분류·추론 계약을 정의한다. OpenCV·특정 모델 런타임·Qt 타입을 공개하지 않으며 OpenCV를 검색하지 않고 단독으로 사용할 수 있다. Vision은 Image의 픽셀·오류 타입만 사용한다. 모델 실행은 InferenceModel, 전처리는 Preprocessor, 프레임 검출은 Detector 인터페이스에 의존한다. 상위 AI 서비스·스케줄러나 iiDecision 구현을 하위 모듈에서 참조하지 않는다. 다른 추론 엔진은 같은 InferenceModel 인터페이스를 구현하여 교체할 수 있다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "## 데이터 객체\n",
+      "level": 2,
+      "title": "데이터 객체"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "list",
+      "start_line": 7,
+      "end_line": 11,
+      "raw": "- Frame은 이미지 view, frame id와 나노초 timestamp를 받는다. 이미지 메모리는 호출 동안 유효해야 한다. DetectionResult는 원본 치수·id·timestamp와 소유한 검출 객체를 반환한다.\n- Object는 class_id, 0..1 confidence, 원본 픽셀 경계 상자, label, 키포인트, 선택적 mask 및 track_id를 가진다. track_id는 호출자가 부여하는 식별자이며 자동 객체 추적 상태가 아니다.\n- Box의 x/y는 좌상단, width/height는 양수이고 우측·하단은 배타적 경계이다. 검출 출력은 원본 영상 범위로 자른다. Keypoint는 원본 픽셀 좌표·confidence·이름을 제공한다. Object에 부착한 Mask의 격자는 해당 box 영역에 대응한다.\n- Mask는 소유한 단일 uint8 평면이다. 세그멘테이션 결과·이진 영역·에지 결과를 보관할 수 있으며 치수와 byte 개수가 일치해야 한다. 세그멘테이션 모델별 출력 해석기를 자동 선택하지 않는다.\n- Tensor는 양수 shape, 연속된 row-major float32 값, 선택적 입출력 이름을 가진다. 원소 수·바이트 한도·유한 값을 검사한다. FeatureSet은 키포인트와 행별 이진 descriptor를 소유한다. TrackedPoint는 광류 결과 좌표·발견 여부·오차를 나타낸다.\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "Frame은 이미지 view, frame id와 나노초 timestamp를 받는다. 이미지 메모리는 호출 동안 유효해야 한다. DetectionResult는 원본 치수·id·timestamp와 소유한 검출 객체를 반환한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Object는 class_id, 0..1 confidence, 원본 픽셀 경계 상자, label, 키포인트, 선택적 mask 및 track_id를 가진다. track_id는 호출자가 부여하는 식별자이며 자동 객체 추적 상태가 아니다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Box의 x/y는 좌상단, width/height는 양수이고 우측·하단은 배타적 경계이다. 검출 출력은 원본 영상 범위로 자른다. Keypoint는 원본 픽셀 좌표·confidence·이름을 제공한다. Object에 부착한 Mask의 격자는 해당 box 영역에 대응한다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Mask는 소유한 단일 uint8 평면이다. 세그멘테이션 결과·이진 영역·에지 결과를 보관할 수 있으며 치수와 byte 개수가 일치해야 한다. 세그멘테이션 모델별 출력 해석기를 자동 선택하지 않는다.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Tensor는 양수 shape, 연속된 row-major float32 값, 선택적 입출력 이름을 가진다. 원소 수·바이트 한도·유한 값을 검사한다. FeatureSet은 키포인트와 행별 이진 descriptor를 소유한다. TrackedPoint는 광류 결과 좌표·발견 여부·오차를 나타낸다.",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "heading",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "## 전처리와 추론\n",
+      "level": 2,
+      "title": "전처리와 추론"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 14,
+      "end_line": 14,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "paragraph",
+      "start_line": 15,
+      "end_line": 15,
+      "raw": "PreprocessOptions는 NCHW `[1,3,H,W]`, stretch/letterbox, RGB/BGR 순서와 `(pixel * scale - mean[channel]) / standard_deviation[channel]`을 명시한다. 기본값은 640×640, RGB, 1/255, letterbox의 RGB border 114이다. 모든 크기·정규화 값을 검증한다. 알파는 모델의 세 RGB 입력에서 사용하지 않으며 ICC 변환은 호출자가 image::to_srgb()로 명시한다.\n"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "PreparedInput은 소유한 tensor와 실제 반올림된 리사이즈 치수에 따른 scale_x/scale_y, 좌상단 padding을 반환한다. YoloDetector는 준비된 shape·원본 치수·모델 출력 이름을 검사한다. 여러 모델 출력에는 output_name을 지정해야 한다. 프레임·비디오 디코딩과 비동기 실행의 수명·취소·스케줄링은 소비자가 기존 iiSDK 런타임으로 구성한다.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 18,
+      "end_line": 18,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "heading",
+      "start_line": 19,
+      "end_line": 19,
+      "raw": "## 객체 검출·분류 후처리\n",
+      "level": 2,
+      "title": "객체 검출·분류 후처리"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 20,
+      "end_line": 20,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "paragraph",
+      "start_line": 21,
+      "end_line": 21,
+      "raw": "YoloSpec은 `[1,C,N]` channels-first와 `[1,N,C]` rows, center_xywh 또는 corners_xyxy, objectness 유무, 정규화 좌표와 logit 여부를 명시한다. 일반적인 YOLOv8형 출력과 YOLOv5형 objectness 출력을 이 계약으로 해석한다. class 수와 선택한 label 수가 일치해야 한다. 점수는 확률이거나 명시한 sigmoid logit이며, 프레임 좌표는 letterbox의 실제 scale/padding을 역변환하여 복원한다.\n"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 22,
+      "end_line": 22,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 23,
+      "end_line": 23,
+      "raw": "suppress()는 class별 NMS가 기본이며 class_agnostic 선택을 제공한다. 점수 내림차순, 동점 입력 순서를 유지하고 임계값 초과 IoU를 억제한다. classify()는 단일 class 벡터를 안정적인 softmax 또는 제공된 확률로 정렬하여 top-k 결과를 반환한다. 임의 모델의 구조·라벨·정확도를 추측하지 않는다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "heading",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "## 제한과 검증\n",
+      "level": 2,
+      "title": "제한과 검증"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "기본 model/tensor 한도는 각각 256 MiB, 후보 10,000개, 반환 객체 4,096개, class·키포인트 100,000개이다. 기본 반환 요청은 100개이다. NMS는 mask byte와 키포인트 수를 입력 전체에 대해 합산하며, 모든 내부 문자열·백엔드의 임시 할당을 합산하는 메모리 할당기는 아니다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "`tests/vision.cpp`는 IoU, class별/전체 NMS, 식별자 보존, YOLO 두 레이아웃·objectness·정규화 좌표·padding 제거·라벨, 큰 logit softmax, 잘못된 shape·NaN·한도와 잘못된 인터페이스 구성을 검사한다. `tests/opencv.cpp`는 실제 OpenCV의 소유한 이미지, 전처리, 특징점과 광류 규약을 검사한다. 기존 ONNX/DNN 로더와 그 모델 픽스처는 폐기하였다. 모델 실행은 별도로 주입한 `InferenceModel` 구현의 책임이다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "Vision AI 객체와 처리 계약",
+      "anchor": "vision-ai-객체와-처리-계약",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "데이터 객체",
+      "anchor": "데이터-객체",
+      "start_line": 5
+    },
+    {
+      "block_id": "b000009",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "전처리와 추론",
+      "anchor": "전처리와-추론",
+      "start_line": 13
+    },
+    {
+      "block_id": "b000015",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "객체 검출·분류 후처리",
+      "anchor": "객체-검출분류-후처리",
+      "start_line": 19
+    },
+    {
+      "block_id": "b000021",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "제한과 검증",
+      "anchor": "제한과-검증",
+      "start_line": 25
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "`iiVisualCodec::Vision`과 `Vision.h`는 C++23 표준 타입으로 영상·검출·분류·추론 계약을 정의한다. OpenCV·특정 모델 런타임·Qt 타입을 공개하지 않으며 OpenCV를 검색하지 않고 단독으로 사용할 수 있다. Vision은 Image의 픽셀·오류 타입만 사용한다. 모델 실행은 InferenceModel, 전처리는 Preprocessor, 프레임 검출은 Detector 인터페이스에 의존한다. 상위 AI 서비스·스케줄러나 iiDecision 구현을 하위 모듈에서 참조하지 않는다. 다른 추론 엔진은 같은 InferenceModel 인터페이스를 구현하여 교체할 수 있다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000007",
+        "line": 7,
+        "text": "- Frame은 이미지 view, frame id와 나노초 timestamp를 받는다. 이미지 메모리는 호출 동안 유효해야 한다. DetectionResult는 원본 치수·id·timestamp와 소유한 검출 객체를 반환한다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000007",
+        "line": 10,
+        "text": "- Mask는 소유한 단일 uint8 평면이다. 세그멘테이션 결과·이진 영역·에지 결과를 보관할 수 있으며 치수와 byte 개수가 일치해야 한다. 세그멘테이션 모델별 출력 해석기를 자동 선택하지 않는다.",
+        "basis": "lexical_match",
+        "context": "list"
+      },
+      {
+        "block_id": "b000013",
+        "line": 17,
+        "text": "PreparedInput은 소유한 tensor와 실제 반올림된 리사이즈 치수에 따른 scale_x/scale_y, 좌상단 padding을 반환한다. YoloDetector는 준비된 shape·원본 치수·모델 출력 이름을 검사한다. 여러 모델 출력에는 output_name을 지정해야 한다. 프레임·비디오 디코딩과 비동기 실행의 수명·취소·스케줄링은 소비자가 기존 iiSDK 런타임으로 구성한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000017",
+        "line": 21,
+        "text": "YoloSpec은 `[1,C,N]` channels-first와 `[1,N,C]` rows, center_xywh 또는 corners_xyxy, objectness 유무, 정규화 좌표와 logit 여부를 명시한다. 일반적인 YOLOv8형 출력과 YOLOv5형 objectness 출력을 이 계약으로 해석한다. class 수와 선택한 label 수가 일치해야 한다. 점수는 확률이거나 명시한 sigmoid logit이며, 프레임 좌표는 letterbox의 실제 scale/padding을 역변환하여 복원한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 23,
+        "text": "suppress()는 class별 NMS가 기본이며 class_agnostic 선택을 제공한다. 점수 내림차순, 동점 입력 순서를 유지하고 임계값 초과 IoU를 억제한다. classify()는 단일 class 벡터를 안정적인 softmax 또는 제공된 확률로 정렬하여 top-k 결과를 반환한다. 임의 모델의 구조·라벨·정확도를 추측하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

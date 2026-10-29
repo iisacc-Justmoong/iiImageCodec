@@ -1,0 +1,130 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:f33bb204db6112b0f6369d3c3aa9264d8b17aa9edb6221312e581e32acc191d3",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "example/README.md",
+    "sha256": "e06f7d44f27edbd8a18fe3c5652efcf530ab4172476dfab13d959b862b1b8e6b",
+    "bytes": 865,
+    "line_count": 19,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "iiVisualCodec native example",
+    "role": "overview",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiVisualCodec native example\n",
+      "level": 1,
+      "title": "iiVisualCodec native example"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 5,
+      "raw": "`pipeline.cpp` encodes PNG and FFV1 video, decodes an actual frame, unprojects AR\ndepth to world points and round-trips those points through an OpenUSD stage.\nIt is also used by the relocated-package consumer contract.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "fenced_code",
+      "start_line": 7,
+      "end_line": 12,
+      "raw": "```sh\ncmake -S example -B build/example/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/example/build --parallel 4\nctest --test-dir build/example/build --output-on-failure\n```\n",
+      "language": "sh",
+      "code": "cmake -S example -B build/example/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/example/build --parallel 4\nctest --test-dir build/example/build --output-on-failure\n",
+      "closed": true
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 14,
+      "end_line": 15,
+      "raw": "The prefix must contain the module and its backend dependencies. See\n`docs/Packaging.md`; image-only clients request only the Image component.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 16,
+      "end_line": 16,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 17,
+      "end_line": 19,
+      "raw": "`vision.cpp` runs native image decoding, OpenCV grayscale conversion, and PNG\nencoding. Run `vision_pipeline input.png output.png`. Model execution is supplied\nthrough the independent Vision interfaces; the retired model loader is absent.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiVisualCodec native example",
+      "anchor": "iivisualcodec-native-example",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 14,
+        "text": "The prefix must contain the module and its backend dependencies. See",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000005",
+        "language": "sh",
+        "code": "cmake -S example -B build/example/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/example/build --parallel 4\nctest --test-dir build/example/build --output-on-failure\n"
+      }
+    ],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

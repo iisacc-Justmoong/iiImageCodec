@@ -1,0 +1,531 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:2f20bab68ed5bee46d40f937d0ee4b3725f08b1282bd079d432208ba5102224e",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/VisionVerification.md",
+    "sha256": "ab2fe05785159c8e1f0b5cfafc451b2bc9ec3d974e56da069cb4f0964cb4d406",
+    "bytes": 6727,
+    "line_count": 72,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "과거 모델 검증 기록",
+    "role": "evidence",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 과거 모델 검증 기록\n",
+      "level": 1,
+      "title": "과거 모델 검증 기록"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 4,
+      "raw": "2026-10-27에 ONNX 실행 경로를 폐기하였다. 아래 내용은 과거 증거이며 현재\n모델 실행 지원이나 현재 빌드 성공을 의미하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "heading",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "# iiVisualCodec 0.3 Vision·OpenCV 검증\n",
+      "level": 1,
+      "title": "iiVisualCodec 0.3 Vision·OpenCV 검증"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "이 문서는 0.3 당시의 검증 기록이다. 현재 0.4 코드와 build/ 증거의 기준은 GeometryVerification.md이며 같은 build/ 경로의 결과 파일은 최신 실행으로 갱신된다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 10,
+      "end_line": 10,
+      "raw": "2026-10-27 macOS ARM64·Apple Clang 21에서 소스·설치 소비자를 검증했다. 0.3.0은 기존 Image·Video·Spatial·USD에 Vision·OpenCV 타깃을 추가한 버전이다. 공개 표준 타입·교체 가능한 모델/전처리/검출 인터페이스와 OpenCV 네이티브 경계를 구분한다. 기존 사용자 설치본은 변경하지 않고 build/relocated 키트에서 검증했다. 구현 변경은 로컬 작업 트리에 있다.\n"
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "heading",
+      "start_line": 12,
+      "end_line": 12,
+      "raw": "## 결과와 증거\n",
+      "level": 2,
+      "title": "결과와 증거"
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 13,
+      "end_line": 13,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "table",
+      "start_line": 14,
+      "end_line": 23,
+      "raw": "| 검증 | 결과 | 기록 |\n| --- | --- | --- |\n| Release 전체 회귀 | 10/10 통과 | build/verification.xml |\n| ASan·UBSan 전체 회귀 | 10/10 통과 | build/asan/build/verification.xml |\n| 재배치 전체 소비자·OpenCV 계약·Vision CLI | 4/4 통과 | build/consumer/build/verification.xml |\n| OpenCV·FFmpeg·USD 검색을 끈 Vision 전용 소비자 | 2/2 통과 | build/vision-consumer/build/verification.xml |\n| OpenCV 검색을 끈 이미지 전용 소비자 | 1/1 통과 | build/image-consumer/build/verification.xml |\n| SDK 명칭과 이미지 전용 소스 설정 | 5/5 통과 | SDK/tests/test_module_names.py |\n| 설치 헤더·archive 객체·백엔드 바이트·실제 로드 경로 | 통과 | build/completion-evidence.json |\n| 기존 비디오·USD 외부 도구 호환성 | 통과 | build/interoperability/report.json |\n",
+      "columns": [
+        "검증",
+        "결과",
+        "기록"
+      ],
+      "rows": [
+        [
+          "Release 전체 회귀",
+          "10/10 통과",
+          "build/verification.xml"
+        ],
+        [
+          "ASan·UBSan 전체 회귀",
+          "10/10 통과",
+          "build/asan/build/verification.xml"
+        ],
+        [
+          "재배치 전체 소비자·OpenCV 계약·Vision CLI",
+          "4/4 통과",
+          "build/consumer/build/verification.xml"
+        ],
+        [
+          "OpenCV·FFmpeg·USD 검색을 끈 Vision 전용 소비자",
+          "2/2 통과",
+          "build/vision-consumer/build/verification.xml"
+        ],
+        [
+          "OpenCV 검색을 끈 이미지 전용 소비자",
+          "1/1 통과",
+          "build/image-consumer/build/verification.xml"
+        ],
+        [
+          "SDK 명칭과 이미지 전용 소스 설정",
+          "5/5 통과",
+          "SDK/tests/test_module_names.py"
+        ],
+        [
+          "설치 헤더·archive 객체·백엔드 바이트·실제 로드 경로",
+          "통과",
+          "build/completion-evidence.json"
+        ],
+        [
+          "기존 비디오·USD 외부 도구 호환성",
+          "통과",
+          "build/interoperability/report.json"
+        ]
+      ]
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 24,
+      "end_line": 24,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 25,
+      "end_line": 25,
+      "raw": "sanitizer는 iiVisualCodec과 테스트에 적용했다. 사전 빌드한 OpenCV·FFmpeg·OpenUSD 전체를 sanitizer로 다시 빌드한 것은 아니다. 기존 이미지·색 관리·썸네일·비디오·VR/AR·USD·구 API·의존성 계약도 10개 항목에 함께 포함된다.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 26,
+      "end_line": 26,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "heading",
+      "start_line": 27,
+      "end_line": 27,
+      "raw": "## 검증한 동작\n",
+      "level": 2,
+      "title": "검증한 동작"
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 28,
+      "end_line": 28,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 29,
+      "end_line": 29,
+      "raw": "Vision 테스트는 실제 기대 IoU, class별/전체 NMS, 원본 순서·track id 보존, YOLO channels-first/rows, objectness·정규화 좌표·label·letterbox 역변환, 큰 logit softmax, 잘못된 크기·NaN·한도와 불완전한 detector 구성을 검사했다.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 31,
+      "end_line": 31,
+      "raw": "OpenCV 테스트는 소유 버퍼 복사와 비연속 Mat ROI, RGB/BGR 채널 순서, RGBA 알파 보존, 리사이즈·그레이스케일·Canny·연결 영역·상자 그리기를 실행했다. 실제 ORB descriptor를 만들었고, 알려진 2픽셀/1픽셀 이동 영상의 광류 좌표가 기대 범위 안으로 이동하는지 검사했다.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 32,
+      "end_line": 32,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 33,
+      "end_line": 33,
+      "raw": "TinyOnnx.h의 embedded-weight ONNX는 RGB 평균을 계산하여 검출/분류 출력을 만든다. 빨간 입력은 class 0, 파란 입력은 class 1로 달라지는 것을 실제 DNN forward와 Object 결과에서 확인했다. frame id/timestamp, 원본 경계 상자, NMS와 label도 함께 확인했다. 동일 모델에 두 동시 작업을 보내 입력·출력 상태가 섞이지 않는지 검사했다. 이 모델은 실행·좌표·호출 계약의 분석적 fixture이며 사전학습 검출기의 일반화 정확도를 측정하는 자료는 아니다.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 34,
+      "end_line": 34,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 35,
+      "end_line": 35,
+      "raw": "설치된 Vision/OpenCV 타깃만으로 같은 계약을 다시 컴파일하고 example/vision.cpp를 실행했다. CLI에 detector.onnx·red.png·class 수 2·입력 2×2를 전달한 결과는 객체 1개, class 0, confidence 1, 원본 box 0.5/0.5/1/1이다. 픽스처는 build/ 하위에서만 생성했다. 모델·라벨·입력 크기는 실제 사용 모델에 맞춰 호출자가 제공한다.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 36,
+      "end_line": 36,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "heading",
+      "start_line": 37,
+      "end_line": 37,
+      "raw": "## 패키지와 의존성\n",
+      "level": 2,
+      "title": "패키지와 의존성"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 39,
+      "end_line": 39,
+      "raw": "OpenCV 4.14.0은 공식 archive·SHA-256으로 고정해 core·imgproc·dnn·features2d·video를 빌드했다. Qt·highgui·videoio·외부 FFmpeg·CUDA·OpenCL·nonfree를 사용하지 않는다. OpenCV 및 포함한 protobuf 등의 재배포 고지와 원본 OpenCV LICENSE를 키트에 보존했다. 의존성 recipe·명령·로그는 build/dependencies/와 tools/dependencies.json에 있다.\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 40,
+      "end_line": 40,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "paragraph",
+      "start_line": 41,
+      "end_line": 41,
+      "raw": "표준 헤더 8개, SDK 정적 라이브러리 6개는 설치본과 각각 바이트/객체 payload가 일치했다. 백엔드 공유 라이브러리도 원본 dependency prefix와 바이트가 일치했다. DYLD_PRINT_LIBRARIES와 사용자 라이브러리 경로 환경변수를 제거한 두 예제를 실행하여 비시스템 라이브러리가 재배치 키트에서 로드됨을 확인했다. Qt·Homebrew 런타임은 없었다. 로그는 build/pipeline-libraries.log와 build/vision_pipeline-libraries.log이다.\n"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 42,
+      "end_line": 42,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "heading",
+      "start_line": 43,
+      "end_line": 43,
+      "raw": "## 재실행\n",
+      "level": 2,
+      "title": "재실행"
+    },
+    {
+      "id": "b000034",
+      "kind": "blank",
+      "start_line": 44,
+      "end_line": 44,
+      "raw": "\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "fenced_code",
+      "start_line": 45,
+      "end_line": 51,
+      "raw": "```sh\npython3 -B tools/bootstrap_dependencies.py --only opencv --jobs 4\ncmake -S . -B build -DIIVISUALCODEC_OPENCV=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix;$PWD/../build/congregation-native/prefix\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --output-junit verification.xml\n```\n",
+      "language": "sh",
+      "code": "python3 -B tools/bootstrap_dependencies.py --only opencv --jobs 4\ncmake -S . -B build -DIIVISUALCODEC_OPENCV=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix;$PWD/../build/congregation-native/prefix\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --output-junit verification.xml\n",
+      "closed": true
+    },
+    {
+      "id": "b000036",
+      "kind": "blank",
+      "start_line": 52,
+      "end_line": 52,
+      "raw": "\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "paragraph",
+      "start_line": 53,
+      "end_line": 53,
+      "raw": "전체 의존성·키트 준비는 Packaging.md를 따른다. 처음에는 stage_package.py로 새 키트를 만들고 경로를 옮긴다. 기존 키트에는 --refresh-opencv로 새 OpenCV payload를 합친 뒤 SDK를 설치할 수 있다. 모든 테스트 빌드는 build/ 아래에 둔다.\n"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 54,
+      "end_line": 54,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "fenced_code",
+      "start_line": 55,
+      "end_line": 68,
+      "raw": "```sh\npython3 -B tools/stage_package.py --refresh-opencv --destination build/relocated\ncmake --install build --prefix \"$PWD/build/relocated\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure --output-junit verification.xml\ncmake -S tests/consumer -B build/vision-consumer/build -DVISUAL_VISION_ONLY=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_OpenCV=ON -DCMAKE_DISABLE_FIND_PACKAGE_pxr=ON \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON\ncmake --build build/vision-consumer/build --parallel 4\nctest --test-dir build/vision-consumer/build --output-on-failure --output-junit verification.xml\n```\n",
+      "language": "sh",
+      "code": "python3 -B tools/stage_package.py --refresh-opencv --destination build/relocated\ncmake --install build --prefix \"$PWD/build/relocated\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure --output-junit verification.xml\ncmake -S tests/consumer -B build/vision-consumer/build -DVISUAL_VISION_ONLY=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_OpenCV=ON -DCMAKE_DISABLE_FIND_PACKAGE_pxr=ON \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON\ncmake --build build/vision-consumer/build --parallel 4\nctest --test-dir build/vision-consumer/build --output-on-failure --output-junit verification.xml\n",
+      "closed": true
+    },
+    {
+      "id": "b000040",
+      "kind": "blank",
+      "start_line": 69,
+      "end_line": 69,
+      "raw": "\n"
+    },
+    {
+      "id": "b000041",
+      "kind": "paragraph",
+      "start_line": 70,
+      "end_line": 70,
+      "raw": "Image-only와 ASan·UBSan 구성도 각 JUnit 기록을 만든 뒤 tests/package_audit.py를 실행한다. PKG_CONFIG_PATH는 현재 사용하는 dependency/relocated prefix를 선택한다. 감사는 현재 10/10/4/2/1 기록, 설치 payload와 두 실제 예제를 함께 검사한다.\n"
+    },
+    {
+      "id": "b000042",
+      "kind": "blank",
+      "start_line": 71,
+      "end_line": 71,
+      "raw": "\n"
+    },
+    {
+      "id": "b000043",
+      "kind": "paragraph",
+      "start_line": 72,
+      "end_line": 72,
+      "raw": "검증 범위는 macOS ARM64 CPU ONNX 실행이다. GPU·NPU·Windows·Linux·모바일 실행이나 특정 사전학습 모델의 정확도는 이 기록의 결과가 아니다. 기존 SDK 전체 등록 검사의 iiVirtualizer 누락은 0.2 기록에 별도로 남겨 두었으며 이번 범위의 변경으로 처리하지 않았다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "과거 모델 검증 기록",
+      "anchor": "과거-모델-검증-기록",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000005",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiVisualCodec 0.3 Vision·OpenCV 검증",
+      "anchor": "iivisualcodec-03-visionopencv-검증",
+      "start_line": 6
+    },
+    {
+      "block_id": "b000011",
+      "parent_id": "b000005",
+      "level": 2,
+      "title": "결과와 증거",
+      "anchor": "결과와-증거",
+      "start_line": 12
+    },
+    {
+      "block_id": "b000017",
+      "parent_id": "b000005",
+      "level": 2,
+      "title": "검증한 동작",
+      "anchor": "검증한-동작",
+      "start_line": 27
+    },
+    {
+      "block_id": "b000027",
+      "parent_id": "b000005",
+      "level": 2,
+      "title": "패키지와 의존성",
+      "anchor": "패키지와-의존성",
+      "start_line": 37
+    },
+    {
+      "block_id": "b000033",
+      "parent_id": "b000005",
+      "level": 2,
+      "title": "재실행",
+      "anchor": "재실행",
+      "start_line": 43
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 4,
+        "text": "모델 실행 지원이나 현재 빌드 성공을 의미하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000029",
+        "line": 39,
+        "text": "OpenCV 4.14.0은 공식 archive·SHA-256으로 고정해 core·imgproc·dnn·features2d·video를 빌드했다. Qt·highgui·videoio·외부 FFmpeg·CUDA·OpenCL·nonfree를 사용하지 않는다. OpenCV 및 포함한 protobuf 등의 재배포 고지와 원본 OpenCV LICENSE를 키트에 보존했다. 의존성 recipe·명령·로그는 build/dependencies/와 tools/dependencies.json에 있다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000035",
+        "language": "sh",
+        "code": "python3 -B tools/bootstrap_dependencies.py --only opencv --jobs 4\ncmake -S . -B build -DIIVISUALCODEC_OPENCV=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix;$PWD/../build/congregation-native/prefix\"\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure --output-junit verification.xml\n"
+      },
+      {
+        "block_id": "b000039",
+        "language": "sh",
+        "code": "python3 -B tools/stage_package.py --refresh-opencv --destination build/relocated\ncmake --install build --prefix \"$PWD/build/relocated\"\ncmake -S tests/consumer -B build/consumer/build \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST\ncmake --build build/consumer/build --parallel 4\nctest --test-dir build/consumer/build --output-on-failure --output-junit verification.xml\ncmake -S tests/consumer -B build/vision-consumer/build -DVISUAL_VISION_ONLY=ON \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/relocated\" -DCMAKE_FIND_FRAMEWORK=LAST \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_OpenCV=ON -DCMAKE_DISABLE_FIND_PACKAGE_pxr=ON \\\n  -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON\ncmake --build build/vision-consumer/build --parallel 4\nctest --test-dir build/vision-consumer/build --output-on-failure --output-junit verification.xml\n"
+      }
+    ],
+    "links": [],
+    "tables": [
+      {
+        "block_id": "b000013",
+        "columns": [
+          "검증",
+          "결과",
+          "기록"
+        ],
+        "rows": [
+          [
+            "Release 전체 회귀",
+            "10/10 통과",
+            "build/verification.xml"
+          ],
+          [
+            "ASan·UBSan 전체 회귀",
+            "10/10 통과",
+            "build/asan/build/verification.xml"
+          ],
+          [
+            "재배치 전체 소비자·OpenCV 계약·Vision CLI",
+            "4/4 통과",
+            "build/consumer/build/verification.xml"
+          ],
+          [
+            "OpenCV·FFmpeg·USD 검색을 끈 Vision 전용 소비자",
+            "2/2 통과",
+            "build/vision-consumer/build/verification.xml"
+          ],
+          [
+            "OpenCV 검색을 끈 이미지 전용 소비자",
+            "1/1 통과",
+            "build/image-consumer/build/verification.xml"
+          ],
+          [
+            "SDK 명칭과 이미지 전용 소스 설정",
+            "5/5 통과",
+            "SDK/tests/test_module_names.py"
+          ],
+          [
+            "설치 헤더·archive 객체·백엔드 바이트·실제 로드 경로",
+            "통과",
+            "build/completion-evidence.json"
+          ],
+          [
+            "기존 비디오·USD 외부 도구 호환성",
+            "통과",
+            "build/interoperability/report.json"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

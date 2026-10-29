@@ -8,4 +8,4 @@ JPEG/PNG/WebP의 EXIF 방향은 픽셀에 적용한 뒤 orientation 1로 정규�
 
 모든 코덱은 입력·출력 바이트, 최대 변과 디코딩 메모리 예산을 검사한다. TIFF의 내부 메모리 할당도 제한한다. 기본 최대 변은 32,768이며 총 픽셀 메모리 기본 제한이 우선한다. 실제 편집 캔버스는 하나의 거대한 GPU 이미지로 올리지 않고 타일을 사용한다.
 
-종속성 키트는 iiSDKBuilder의 `tools/build_native_kit.py`로 버전·체크섬·지원 OS를 고정한다. 재배포 시 STB와 각 이미지 코덱의 라이선스를 함께 배치한다. `iiImageCodec.Contracts`는 실제 각 형식·알파·방향 8종·ICC 왕복, 손상/잘림/예산 입력을 검사한다.
+종속성 키트는 iiSDKBuilder의 `tools/build_native_kit.py`로 버전·체크섬·지원 OS를 고정한다. 재배포 시 STB와 각 이미지 코덱의 라이선스를 함께 배치한다. `iiVisualCodec.contracts`는 실제 각 형식·알파·방향 8종·ICC 왕복, 손상/잘림/예산 입력을 검사한다.

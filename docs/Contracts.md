@@ -1,12 +1,25 @@
-# 이미지 코덱 계약
+# 비주얼 코덱 계약
 
-공개 타입은 C++23 표준 타입만 사용한다. PNG/JPEG 구현은 각각 libpng와 libjpeg 호환 라이브러리이며, CMake가 의존성을 찾고 정적 패키지 소비자에게 전파한다. Qt나 상위 iiSDK를 검색·포함·링크하지 않는다. 외부 라이브러리를 제거한 자체 포맷 구현이라고 주장하지 않는다.
+0.3의 Vision은 Image의 표준 값 타입을 사용하고 Object·Tensor·InferenceModel·Preprocessor·Detector 계약을 제공한다. OpenCV는 Vision 인터페이스를 구현하는 독립 백엔드이다. 원본 좌표·정규화·YOLO 출력·NMS는 VisionAI.md, 네이티브 Mat 경계·영상 처리·ONNX 실행은 OpenCV.md를 따른다. Image/Vision만 패키지로 요청하면 OpenCV를 검색하지 않는다.
 
-- 입력/출력 압축 바이트, 디코딩 픽셀 바이트, 가로·세로 한도를 별도로 제한한다. 기본값은 입력/출력 64 MiB, RGBA 출력 256 MiB, 각 변 16,384이다. 내부 코덱의 모든 임시 할당을 합산한 메모리 할당기는 아니다.
-- 입력은 호출 동안 유효해야 한다. 반환한 바이트와 픽셀은 결과 객체가 소유한다. RGB/RGBA의 알파는 비선형 8비트 straight alpha이며 행은 위에서 아래 순서이다. 입력 픽셀의 색 공간 변환은 호출자의 책임이다.
-- PNG는 알파를 보존한다. 디코딩 결과는 8비트 RGBA로 정규화하므로 16비트 원본 보존, ICC/EXIF/XMP 전달, 자동 회전, 애니메이션 보존은 이 API의 계약에 포함하지 않는다. APNG를 애니메이션 문서로 처리하지 않는다.
-- JPEG는 손실 포맷이다. 알파를 자동으로 삭제하지 않으며 RGBA 입력은 오류로 반환한다. 호출자가 배경 합성을 먼저 수행해야 한다. JPEG 경고·잘린 입력은 디코딩 오류로 처리한다.
-- libjpeg의 오류 처리 `longjmp`는 별도 C 파일 내부에 한정한다. C++ 객체의 소멸자를 건너뛰지 않으며 실패 경로의 C 할당을 회수한다. 인코딩 출력은 바이트 한도 내에서 확장한다.
-- 파일 경로, 원자적 저장, 임시 디렉터리, 캐시, 워터마크, 문서 레이어 및 UI 변환은 소비자가 소유한다. WebP/HEIF/AVIF/TIFF/RAW, 벡터, 글꼴·텍스트 조판, 비디오 코덱은 아직 제공하지 않는다.
+`iiVisualCodec 0.4`는 `iiImageCodec`의 이미지 기능을 유지하면서 비디오·VR·AR·USD·Vision·OpenCV·3D·CAD를 제공하는 C++23 모듈이다. 일반 API는 표준 타입을 사용하고 OpenCVBridge.h의 명시적 네이티브 경계에서 cv::Mat을 허용한다. 의존성은 Image → Spatial → Video/USD, Image → Vision → OpenCV, Image → Geometry → Asset3D/CAD/USD 방향이다. 상위 SDK 문서·GUI·스케줄러·네트워크·Qt를 참조하지 않는다. FFmpeg/OpenUSD/Assimp/OCCT 구현 타입은 공개 헤더에 노출하지 않는다.
 
-`tests/contracts.cpp`는 RGB 행 패딩, PNG 알파 왕복, JPEG 인코딩/디코딩, 알파·품질 거절, 크기/바이트/stride 경계 및 잘린 입력을 실행 검증한다. macOS 실행 결과를 다른 플랫폼 실행 결과로 취급하지 않는다.
+Geometry의 소유 메시·재질·노드와 Asset3D의 가상 파일 Bundle 및 CAD의 불변 Shape는 각각 Geometry.md·Asset3D.md·CAD.md를 따른다. USD의 `from_geometry`는 미터/Y 위쪽으로 굽고 새 스테이지를 만든다. 기존 USD 문서의 편집 가능한 계층 보존 API와 구분한다.
+
+## 이미지
+
+기본 입력·출력은 각각 64 MiB, 디코딩 픽셀은 256 MiB, 한 변은 32,768이다. 크기·stride의 범위와 곱셈 오버플로를 검사한다. 반환한 바이트·RGBA8 픽셀은 결과가 소유한다. 픽셀은 위에서 아래 순서의 straight alpha이며 ICC 변환은 `to_srgb()`로 명시한다.
+
+PNG/JPEG/BMP/GIF/TGA/composite PSD/WebP/TIFF를 읽고 PNG/JPEG/BMP/TGA/WebP/TIFF를 쓴다. PNG/JPEG/WebP/TIFF의 ICC 프로필, 해상도와 EXIF 방향을 처리하며 디코딩 결과 방향은 정규화된다. `encode_jpeg()`는 RGB만 받고, 범용 `encode(..., Format::jpeg)`는 지정 matte에 RGBA를 합성한다. GIF/PSD는 읽기 전용이며 레이어·애니메이션 문서 보존은 해당 문서 SDK의 책임이다. JPEG의 longjmp는 별도 C 파일 안에서 처리한다.
+
+이미지 형식·색 관리·썸네일의 세부 규칙은 기존 NativeFormats.md, ColorManagement.md, Thumbnails.md를 따른다. `inspect()`는 형식·치수 조사이며 파일 전체의 무결성 보증이 아니다.
+
+## 확장 기능과 소유권
+
+비디오는 동기 메모리 API이다. 컨테이너에서 실제 비디오 스트림을 선택하고 RGBA 프레임·유리수 시간 기준·PTS·duration을 반환한다. 부호 없는 바이트 한도, 디코딩 프레임 수, 전체 RGBA 바이트와 패킷 수를 별도로 검사한다. 외부 URL·파일·재생목록 열기는 차단한다. 오디오·자막 보존은 이 비디오 프레임 API에 포함하지 않는다. 자세한 규칙은 Video.md에 있다.
+
+Spatial은 스테레오 영상, 파노라마 방향, 카메라 내부 파라미터와 깊이 단위를 처리한다. VR 기기의 표시·추적 세션이나 AR 환경 추적은 플랫폼 런타임의 책임이며, 이 모듈은 입력과 결과의 공간 표현·변환을 제공한다. 구체적인 좌표계는 Spatial.md에 있다.
+
+USD는 공식 OpenUSD를 사용하는 독립 백엔드이다. 원본 루트 레이어의 미지 스키마·계층·변형·시간 샘플을 보존하고, 편의 API로 메시·카메라·재질·점군을 편집한다. 파일 기반 USD 입력은 네이티브 resolver로 로컬 에셋을 찾으므로 신뢰할 수 있는 소스에 사용한다. root 파일 바이트 한도와 조회 결과 한도는 전체 종속 에셋을 합산하는 보안 샌드박스나 모든 내부 할당을 차단하는 메모리 할당기가 아니다. USD.md를 참조한다.
+
+모든 Result 오류에는 코드와 원인이 있다. 지원하지 않는 형식·백엔드 기능은 명시적으로 실패한다. 호출 중 입력 수명, 동일 USD Document의 동시 접근, 파일 저장·교체·공개 정책은 호출자가 소유한다. 테스트·빌드가 실행된 플랫폼만 실행 검증으로 보고한다.

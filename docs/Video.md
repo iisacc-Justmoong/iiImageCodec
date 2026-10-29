@@ -1,0 +1,50 @@
+# 비디오와 공간 비디오
+
+`VideoCodec.h`와 `iiVisualCodec::Video`가 동기 메모리 입출력을 제공한다. `encode()`는 고정 치수의 RGB/RGBA 영상, 비음수이면서 엄격히 증가하는 PTS와 양수 duration을 받는다. 시간 기준은 `{분자, 분모}`이고 기본값은 1/30초이다. 컨테이너가 시간 기준을 바꾸면 decode 결과 Info.time_base를 함께 사용해야 한다. 지연 프레임·패킷은 종료 때 flush한다. 출력 컨테이너는 Matroska·MP4·MOV·AVI이다.
+
+모든 프레임의 duration이 같고 인접 PTS 차이도 같은 완전한 고정 속도 입력은
+시간 기준과 duration에서 정확한 유리수 속도를 계산해 컨테이너에 알린다. 한
+프레임 영상의 속도는 그 프레임의 duration을 기준으로 한다. 이로써 짧은 FFV1
+Matroska 영상을 읽을 때 컨테이너의 타임스탬프 눈금을 프레임 속도로 잘못 쓰는
+경우를 방지한다. 속도를 백엔드 정수 유리수로 정확히 표현할 수 없거나 프레임
+간격이 일정하지 않으면 별도의 고정 속도 메타데이터를 설정하지 않는다. PTS·duration은 그대로
+전달하며, 각 컨테이너의 시간 기준 정밀도는 별도 제한이다.
+
+0.4.1부터 제공하는 `inspect_display()`는 기존 `inspect()`와 별도의 `DisplayInfo`를 반환하여 원본
+코딩 크기·프레임 정보, 정확한 샘플 종횡비, 전체 3×3 고정소수점 표시 행렬과
+행렬의 반시계 회전각, `rotate` 스트림 태그, 컨테이너·원본 픽셀 형식과 오디오
+스트림 수를 노출한다. 행렬이 없으면 `has_display_matrix`는 거짓이며 행렬
+회전각은 0이다. 샘플 비율 `0/1`은 미지정이다. 태그는 해석하거나 행렬과
+합치지 않고 최대 128바이트로 보존하므로 소비자가 우선순위와 지원 범위를
+결정한다. 잘린 행렬과 특이 행렬은 명시적으로 거부한다. 이 API는 기존 디코더의
+픽셀·크기를 바꾸지 않으며 표시 변환과 오디오 처리는 소비자의 책임이다.
+이 API를 사용하는 설치 소비자는 `find_package(iiVisualCodec 0.4.1 CONFIG REQUIRED COMPONENTS Video)`를 요청해야 한다.
+`tests/video_display.cpp`는 `resources/video/`의 자체 제작 MP4·Matroska
+픽스처로 비정사각 픽셀, 회전 행렬·태그, 오디오, 제한과 잘못된 행렬을 검사한다.
+설치 소비자 검사는 같은 공개 API를 스테이징된 Video 컴포넌트로 다시 빌드한다.
+
+0.4.2의 `decode_with_timing()`은 기존 `decode()`와 같은 프레임을 별도
+`TimedVideo`로 반환하고, FFmpeg가 제공한 최선의 타임스탬프가 없어 자체적으로
+타임스탬프를 만든 프레임이 하나라도 있으면 `used_fallback_timestamps`를 설정한다.
+이 값은 FFmpeg가 내부적으로 타임스탬프를 추정했는지까지 증명하지 않는다.
+`frame_display_matrix_differs`는 디코더가 보고한 프레임 표시 행렬이 스트림 행렬과
+다르거나 잘린 경우 설정된다. 스트림 행렬이 없으면 항등 행렬과 비교하고, 프레임
+행렬이 스트림 행렬과 같으면 설정하지 않는다. 이 값은 FFmpeg가 공개하지 않은
+표시 메타데이터가 없음을 증명하지는 않는다. 기존 `decode()`는 이 추가 진단을
+반환하지 않고 기존의 코딩 방향 픽셀을 유지한다.
+선택적 취소 함수는 호출 스레드에서 검사하며 탐색 전후와 패킷·프레임 처리 사이에
+취소되면 부분 영상을 반환하지 않고 `cancelled` 오류를 반환한다. 개별 FFmpeg 호출을
+강제로 중단하거나 지연 시간을 보장하지 않는다. 기존 `decode()`의 형식과 동작은
+유지한다. 이 새 함수를 쓰는 설치 소비자는 Video 구성요소 버전 0.4.2 이상을
+요청해야 한다. `tests/video_display.cpp`는 기존 결과의 픽셀·타임스탬프 일치와
+입력 한도, 실행 중 및 사전 취소를 확인한다.
+
+기본 FFmpeg 키트는 OpenH264 기반 H.264·FFV1·MPEG-4 Part 2·MJPEG 소프트웨어 인코딩과 H.264·HEVC·VP9·MPEG-4·MJPEG·FFV1 디코딩을 구성한다. FFV1/BGRA는 알파를 포함해 무손실이다. MPEG-4/MJPEG와 대부분의 배포용 코덱은 YUV 변환·압축 손실을 수반하며 4:2:0 인코딩은 짝수 치수를 요구한다. H.264는 BSD 라이선스 OpenH264 소프트웨어 인코더를 우선 사용한다. 이 인코더는 각 변이 최소 16픽셀이어야 한다. 해당 구현이 없으면 백엔드의 H.264 인코더를 선택한다. HEVC 하드웨어 인코딩은 macOS VideoToolbox가 제공될 때 사용할 수 있다. VP9·AV1 인코더 등 추가 코덱은 외부 LGPL 백엔드에 해당 인코더가 있을 때만 동작한다. AV1의 실제 디코딩은 백엔드의 소프트웨어/하드웨어 구현 제공 여부에 달려 있다. 사용할 수 없는 인코더는 unsupported_format으로 반환한다.
+
+Limits의 기본값은 입력·출력·전체 디코딩 RGBA 각각 512 MiB, 프레임 4,096개, 패킷 1,000,000개이다. 각 프레임에는 image::Limits도 적용한다. 입력의 오디오·자막·첨부 파일을 결과에 담지 않으며, 프레임만 다시 인코딩하면 해당 스트림은 복사되지 않는다. 메모리 전체 시퀀스 API이므로 장시간 영상 스트리밍·실시간 재생 스케줄링은 소비자의 별도 책임이다.
+
+컨테이너 I/O는 사용자 지정 AVIO만 사용하며 중첩 파일·URL 열기를 거절한다. 허용된 demuxer는 Matroska/WebM, MOV/MP4와 AVI이다. 바이트 제한은 내부 코덱의 임시 할당 총합을 추적하는 제한이 아니다.
+
+Spatial.Metadata의 equirectangular와 side_by_side/top_bottom을 컨테이너 spherical/stereo side data로 기록한다. MP4는 널리 사용되는 Spherical Video v2의 st3d/sv3d 확장 box가 보존되도록 FFmpeg의 확장 허용 모드를 명시한다. 각 파노라마 눈 영상은 2:1이어야 한다. AVI 공간 메타데이터, packed stereo MOV와 export의 비항등 pose는 지원하지 않으므로 오류가 반환된다. 입력의 spherical yaw/pitch/roll은 quaternion으로 읽는다. 지원하지 않는 투영·스테레오 패킹·반전된 눈 순서는 명시적으로 거절한다. 시점 영상 생성은 spatial::render_view()로 처리할 수 있다.
+
+`backend_info()`는 실제 링크된 FFmpeg 버전·라이선스·configure 옵션을 반환한다. GPL/nonfree 빌드가 연결되면 API는 처리를 거절한다. 키트 빌드·라이선스 자료는 Packaging.md에 있다.

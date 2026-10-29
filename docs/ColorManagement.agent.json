@@ -1,0 +1,114 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:220eaa013f4ec4ce36c34ea4212bd469f90a3a60f1cf0ff0ecb55f294046a03a",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/ColorManagement.md",
+    "sha256": "5c7c58ee1222bfd828d91e4d3068d1e3c26778c4d864e132266f487be14d5d10",
+    "bytes": 1073,
+    "line_count": 14,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "명시적인 ICC 색공간 변환",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 명시적인 ICC 색공간 변환\n",
+      "level": 1,
+      "title": "명시적인 ICC 색공간 변환"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 5,
+      "raw": "디코더는 원본 RGB 값과 ICC 프로파일을 보존한다. 문서가 sRGB 작업 공간을 요구하면\n`to_srgb(Image)`를 명시적으로 호출한다. macOS는 CoreGraphics, Windows는 WIC,\nLinux는 Little CMS 2를 사용한다. 브라우저나 Qt를 사용하지 않으며 파일을 열지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 10,
+      "raw": "입력은 straight-alpha RGBA8이며 변환 결과도 같은 채널 순서와 알파 계약을 사용한다.\n좌표·크기·해상도·방향 메타데이터는 변경하지 않는다. RGB가 아닌 ICC 및 잘못된\n프로파일은 오류이다. 프로파일이 없는 입력은 sRGB로 간주하여 픽셀을 그대로 반환한다.\n프로파일 예산은 1 MiB이며 픽셀 예산도 기존 이미지 코덱 한도를 따른다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 11,
+      "end_line": 11,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 12,
+      "end_line": 14,
+      "raw": "Mac 테스트는 시스템 Display P3 프로파일을 사용하여 색원색 변환, 행 순서와 알파\n보존을 검사한다. Windows·Linux의 변환 소스는 해당 OS API를 사용하며 실행 검증은\n각 플랫폼 호스트가 있는 환경에서 추가로 수행해야 한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "명시적인 ICC 색공간 변환",
+      "anchor": "명시적인-icc-색공간-변환",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000005",
+        "line": 8,
+        "text": "좌표·크기·해상도·방향 메타데이터는 변경하지 않는다. RGB가 아닌 ICC 및 잘못된",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000007",
+        "line": 14,
+        "text": "각 플랫폼 호스트가 있는 환경에서 추가로 수행해야 한다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

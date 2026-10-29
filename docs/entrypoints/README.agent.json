@@ -1,0 +1,682 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:71c31649c772bd6a75544e817aff9aa05383a097df5b186022a4cce4ed5415d3",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "README.md",
+    "sha256": "d4e60b9b048c391792d5b6af17db6f791e0f9b0f82a8087e2ced18b0ce17bc61",
+    "bytes": 7981,
+    "line_count": 132,
+    "encoding": "utf-8",
+    "language": "en"
+  },
+  "document": {
+    "title": "iiVisualCodec",
+    "role": "overview",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# iiVisualCodec\n",
+      "level": 1,
+      "title": "iiVisualCodec"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 8,
+      "raw": "iiVisualCodec is iiSDK's Qt-free C++23 visual media SDK. It replaces\n**iiImageCodec** and provides independent image, video, VR/AR, OpenUSD,\nVision AI, OpenCV, static 3D assets and exact CAD components. Version 0.4 adds\nportable geometry, Assimp exchange, Open CASCADE modeling and CAD-to-GLB/USD conversion.\nOrdinary public headers use\nstandard C++ values; `OpenCVBridge.h` is the explicit native `cv::Mat` boundary.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 10,
+      "end_line": 16,
+      "raw": "Version 0.4.2 adds cooperative video decode cancellation, reports whether the decoder\nhad to synthesize a missing timestamp, and declares the exact rate of uniformly timed\nencoded frames when the backend can represent it. It also reports decoded frame\ndisplay matrices that differ from the stream matrix. Version 0.4.1 added video display inspection for coded dimensions, sample aspect ratio, the\noriginal display matrix and rotation tag, source pixel format, container and\naudio stream count. Decoded pixels stay in their coded orientation; the caller\nchooses how to apply the presentation transform and handle other streams.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 17,
+      "end_line": 17,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "table",
+      "start_line": 18,
+      "end_line": 29,
+      "raw": "| Component / CMake target | Features |\n| --- | --- |\n| `iiVisualCodec::Image` | PNG, JPEG, BMP, GIF, TGA, composite PSD, WebP and TIFF decoding; PNG/JPEG/BMP/TGA/WebP/TIFF encoding; ICC conversion and thumbnails |\n| `iiVisualCodec::Spatial` | Packed stereo split/join, 360° equirectangular perspective viewports, camera intrinsics, poses and depth-to-world point clouds |\n| `iiVisualCodec::Video` | Bounded memory demux/decode/encode, RGBA frames, rational timestamps, MP4/MOV/Matroska/AVI and standard spherical/stereo metadata through FFmpeg |\n| `iiVisualCodec::USD` | Native OpenUSD stages, USDA/USDC/USDZ, meshes, cameras, Preview Surface materials and textures, point clouds, transforms and time samples |\n| `iiVisualCodec::Vision` | Objects, boxes, keypoints, masks, tensors, model/preprocessor/detector interfaces, YOLO decoding, source coordinates, NMS and classification |\n| `iiVisualCodec::OpenCV` | Owned Mat interop, image operations, Canny/regions, ORB, optical flow, annotation and vision preprocessing |\n| `iiVisualCodec::Geometry` | Owned triangle meshes, normals, UVs, materials, textures, hierarchy/instances, affine transforms, units, winding and bounds; no 3D backend required |\n| `iiVisualCodec::Asset3D` | Memory-only Assimp static asset exchange: glTF/GLB, OBJ/MTL, STL, PLY, COLLADA and FBX; 3DS import |\n| `iiVisualCodec::CAD` | Open CASCADE exact shapes, primitives, extrusion, Boolean operations, metrics, tessellation, STEP/BREP memory exchange and explicit IGES file input |\n| `iiVisualCodec::iiVisualCodec` | All requested package components |\n",
+      "columns": [
+        "Component / CMake target",
+        "Features"
+      ],
+      "rows": [
+        [
+          "`iiVisualCodec::Image`",
+          "PNG, JPEG, BMP, GIF, TGA, composite PSD, WebP and TIFF decoding; PNG/JPEG/BMP/TGA/WebP/TIFF encoding; ICC conversion and thumbnails"
+        ],
+        [
+          "`iiVisualCodec::Spatial`",
+          "Packed stereo split/join, 360° equirectangular perspective viewports, camera intrinsics, poses and depth-to-world point clouds"
+        ],
+        [
+          "`iiVisualCodec::Video`",
+          "Bounded memory demux/decode/encode, RGBA frames, rational timestamps, MP4/MOV/Matroska/AVI and standard spherical/stereo metadata through FFmpeg"
+        ],
+        [
+          "`iiVisualCodec::USD`",
+          "Native OpenUSD stages, USDA/USDC/USDZ, meshes, cameras, Preview Surface materials and textures, point clouds, transforms and time samples"
+        ],
+        [
+          "`iiVisualCodec::Vision`",
+          "Objects, boxes, keypoints, masks, tensors, model/preprocessor/detector interfaces, YOLO decoding, source coordinates, NMS and classification"
+        ],
+        [
+          "`iiVisualCodec::OpenCV`",
+          "Owned Mat interop, image operations, Canny/regions, ORB, optical flow, annotation and vision preprocessing"
+        ],
+        [
+          "`iiVisualCodec::Geometry`",
+          "Owned triangle meshes, normals, UVs, materials, textures, hierarchy/instances, affine transforms, units, winding and bounds; no 3D backend required"
+        ],
+        [
+          "`iiVisualCodec::Asset3D`",
+          "Memory-only Assimp static asset exchange: glTF/GLB, OBJ/MTL, STL, PLY, COLLADA and FBX; 3DS import"
+        ],
+        [
+          "`iiVisualCodec::CAD`",
+          "Open CASCADE exact shapes, primitives, extrusion, Boolean operations, metrics, tessellation, STEP/BREP memory exchange and explicit IGES file input"
+        ],
+        [
+          "`iiVisualCodec::iiVisualCodec`",
+          "All requested package components"
+        ]
+      ]
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 30,
+      "end_line": 30,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "fenced_code",
+      "start_line": 31,
+      "end_line": 37,
+      "raw": "```cmake\nfind_package(iiVisualCodec 0.4 CONFIG REQUIRED COMPONENTS Image Spatial Video USD Vision OpenCV Geometry Asset3D CAD)\ntarget_link_libraries(my_backend PRIVATE iiVisualCodec::iiVisualCodec)\n# Image-only consumers do not discover FFmpeg, OpenUSD or OpenCV:\n# find_package(iiVisualCodec 0.3 CONFIG REQUIRED COMPONENTS Image)\n# target_link_libraries(my_backend PRIVATE iiVisualCodec::Image)\n```\n",
+      "language": "cmake",
+      "code": "find_package(iiVisualCodec 0.4 CONFIG REQUIRED COMPONENTS Image Spatial Video USD Vision OpenCV Geometry Asset3D CAD)\ntarget_link_libraries(my_backend PRIVATE iiVisualCodec::iiVisualCodec)\n# Image-only consumers do not discover FFmpeg, OpenUSD or OpenCV:\n# find_package(iiVisualCodec 0.3 CONFIG REQUIRED COMPONENTS Image)\n# target_link_libraries(my_backend PRIVATE iiVisualCodec::Image)\n",
+      "closed": true
+    },
+    {
+      "id": "b000010",
+      "kind": "blank",
+      "start_line": 38,
+      "end_line": 38,
+      "raw": "\n"
+    },
+    {
+      "id": "b000011",
+      "kind": "fenced_code",
+      "start_line": 39,
+      "end_line": 50,
+      "raw": "```cpp\n#include <iiVisualCodec/VisualCodec.h>\nnamespace visual = ii::visual;\nauto png = visual::image::encode_png({width, height,\n    visual::image::PixelFormat::rgb8, stride, rgb});\nvisual::video::FrameView frame{rgba_image.view(), 0, 1};\nauto movie = visual::video::encode(std::span(&frame, 1)); // lossless FFV1/Matroska\n\nauto scene = visual::usd::Document::create();\n// Author meshes/cameras/materials, then export to a new destination:\n// scene->write(\"scene.usdz\", visual::usd::Format::usdz);\n```\n",
+      "language": "cpp",
+      "code": "#include <iiVisualCodec/VisualCodec.h>\nnamespace visual = ii::visual;\nauto png = visual::image::encode_png({width, height,\n    visual::image::PixelFormat::rgb8, stride, rgb});\nvisual::video::FrameView frame{rgba_image.view(), 0, 1};\nauto movie = visual::video::encode(std::span(&frame, 1)); // lossless FFV1/Matroska\n\nauto scene = visual::usd::Document::create();\n// Author meshes/cameras/materials, then export to a new destination:\n// scene->write(\"scene.usdz\", visual::usd::Format::usdz);\n",
+      "closed": true
+    },
+    {
+      "id": "b000012",
+      "kind": "blank",
+      "start_line": 51,
+      "end_line": 51,
+      "raw": "\n"
+    },
+    {
+      "id": "b000013",
+      "kind": "paragraph",
+      "start_line": 52,
+      "end_line": 55,
+      "raw": "Image and video codecs operate entirely on memory. File reads and atomic\npublication belong to the caller (normally iiFileProvider). USD also provides\nexplicit native file/resolver I/O because scene composition and USDZ packages\ncan reference local assets. `Document::write` rejects existing destinations.\n"
+    },
+    {
+      "id": "b000014",
+      "kind": "blank",
+      "start_line": 56,
+      "end_line": 56,
+      "raw": "\n"
+    },
+    {
+      "id": "b000015",
+      "kind": "paragraph",
+      "start_line": 57,
+      "end_line": 65,
+      "raw": "The default dependency bootstrap pins a GPL/nonfree-disabled **shared LGPL\nFFmpeg 8.0.1**, **OpenH264 2.6.0**, **OpenUSD 26.11.1**, **oneTBB 2021.12.0** and\nApache-2.0 **OpenCV 4.14.0**, BSD **Assimp 6.0.5** and shared LGPL-2.1-with-exception\n**Open CASCADE 8.0.1**. It verifies source\nSHA-256 values and records build commands under `build/dependencies/`. Source\narchives and license notices must accompany any redistribution of FFmpeg; the\napplication's own code remains separate. The module rejects GPL/nonfree FFmpeg\nbuilds at runtime. Image dependencies are libpng >= 1.6, libjpeg, zlib,\nWebP >= 1 and TIFF >= 4.5; Linux ICC conversion also needs Little CMS 2.\n"
+    },
+    {
+      "id": "b000016",
+      "kind": "blank",
+      "start_line": 66,
+      "end_line": 66,
+      "raw": "\n"
+    },
+    {
+      "id": "b000017",
+      "kind": "fenced_code",
+      "start_line": 67,
+      "end_line": 76,
+      "raw": "```sh\npython3 tools/bootstrap_dependencies.py --jobs 4\nexport PKG_CONFIG_PATH=\"$PWD/build/dependencies/prefix/lib/pkgconfig\"\ncmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix\" \\\n  -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build --prefix \"$PWD/build/install\"\n```\n",
+      "language": "sh",
+      "code": "python3 tools/bootstrap_dependencies.py --jobs 4\nexport PKG_CONFIG_PATH=\"$PWD/build/dependencies/prefix/lib/pkgconfig\"\ncmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix\" \\\n  -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build --prefix \"$PWD/build/install\"\n",
+      "closed": true
+    },
+    {
+      "id": "b000018",
+      "kind": "blank",
+      "start_line": 77,
+      "end_line": 77,
+      "raw": "\n"
+    },
+    {
+      "id": "b000019",
+      "kind": "paragraph",
+      "start_line": 78,
+      "end_line": 84,
+      "raw": "For image/spatial-only builds, pass `-DIIVISUALCODEC_VIDEO=OFF\n-DIIVISUALCODEC_USD=OFF -DIIVISUALCODEC_OPENCV=OFF -DIIVISUALCODEC_3D=OFF\n-DIIVISUALCODEC_CAD=OFF`. Native Windows FFmpeg builds require an MSYS2 toolchain;\nthe C++ SDK also accepts externally built backends through CMake/pkg-config.\n`install-native.sh` bootstraps the backends and installs into the shared native\nkit under `SDK/build/` by default; `IISDK_NATIVE_PREFIX` changes that destination.\nThe backend prefix must accompany the installed SDK in the consuming kit.\n"
+    },
+    {
+      "id": "b000020",
+      "kind": "blank",
+      "start_line": 85,
+      "end_line": 85,
+      "raw": "\n"
+    },
+    {
+      "id": "b000021",
+      "kind": "paragraph",
+      "start_line": 86,
+      "end_line": 88,
+      "raw": "The legacy `iiImageCodec` CMake package, target, include path and `ii::image`\nnamespace remain forwarding compatibility surfaces. New code uses\n`iiVisualCodec`, `<iiVisualCodec/...>` and `ii::visual::image`.\n"
+    },
+    {
+      "id": "b000022",
+      "kind": "blank",
+      "start_line": 89,
+      "end_line": 89,
+      "raw": "\n"
+    },
+    {
+      "id": "b000023",
+      "kind": "paragraph",
+      "start_line": 90,
+      "end_line": 97,
+      "raw": "See [contracts](docs/Contracts.md), [video](docs/Video.md),\n[VR/AR processing](docs/Spatial.md), [OpenUSD](docs/USD.md),\n[Vision AI](docs/VisionAI.md), [OpenCV](docs/OpenCV.md),\n[geometry](docs/Geometry.md), [3D assets](docs/Asset3D.md), [CAD](docs/CAD.md),\n[dependency and package delivery](docs/Packaging.md),\n[0.4 verification](docs/GeometryVerification.md),\n[0.3 verification](docs/VisionVerification.md) and [0.2 verification](docs/Verification.md).\nRunnable usage is in `example/`.\n"
+    },
+    {
+      "id": "b000024",
+      "kind": "blank",
+      "start_line": 98,
+      "end_line": 98,
+      "raw": "\n"
+    },
+    {
+      "id": "b000025",
+      "kind": "paragraph",
+      "start_line": 99,
+      "end_line": 107,
+      "raw": "`COMPONENTS Geometry` imports no Assimp, OCCT, OpenCV, FFmpeg or USD backend.\n`COMPONENTS Asset3D CAD` adds the independent native geometry backends. Asset\ndecoding uses a bounded virtual file bundle including sidecars; output bundles\nmust be published in full by the caller. CAD coordinates are millimetres;\n3D export normalizes units/up-axis to metres/+Y. `usd::from_geometry` creates a\nnew baked USD stage. Animation/skins, CAD product metadata and design history\nare outside the static interchange contract. See `example/geometry.cpp`.\nOCCT source and license/exception notices accompany staged shared libraries;\nfinal product distributions must maintain LGPL replacement and source conditions.\n"
+    },
+    {
+      "id": "b000026",
+      "kind": "blank",
+      "start_line": 108,
+      "end_line": 108,
+      "raw": "\n"
+    },
+    {
+      "id": "b000027",
+      "kind": "paragraph",
+      "start_line": 109,
+      "end_line": 112,
+      "raw": "Portable Vision-only clients request `COMPONENTS Vision`. `InferenceModel`,\n`Preprocessor`, and `Detector` are independent interfaces for supported native\nmodel implementations. OpenCV provides owned image interop, preprocessing, ORB,\nand optical flow. Its former ONNX/DNN model loader has been removed.\n"
+    },
+    {
+      "id": "b000028",
+      "kind": "blank",
+      "start_line": 113,
+      "end_line": 113,
+      "raw": "\n"
+    },
+    {
+      "id": "b000029",
+      "kind": "paragraph",
+      "start_line": 114,
+      "end_line": 115,
+      "raw": "`example/vision.cpp` performs an image-to-grayscale pipeline. No model file is\nloaded by this example. See [the runtime retirement contract](docs/RuntimeRetirement.md).\n"
+    },
+    {
+      "id": "b000030",
+      "kind": "blank",
+      "start_line": 116,
+      "end_line": 116,
+      "raw": "\n"
+    },
+    {
+      "id": "b000031",
+      "kind": "heading",
+      "start_line": 117,
+      "end_line": 117,
+      "raw": "## Documentation entry points\n",
+      "level": 2,
+      "title": "Documentation entry points"
+    },
+    {
+      "id": "b000032",
+      "kind": "blank",
+      "start_line": 118,
+      "end_line": 118,
+      "raw": "\n"
+    },
+    {
+      "id": "b000033",
+      "kind": "list",
+      "start_line": 119,
+      "end_line": 122,
+      "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "Human overview: this English `README.md`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Agent instructions: [AGENT.md](AGENT.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Human documentation: [documentation index](docs/README.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Structured agent documentation: [agent index](docs/agent-index.json).",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000034",
+      "kind": "html",
+      "start_line": 123,
+      "end_line": 123,
+      "raw": "<!-- workspace-docs:readme:end -->\n"
+    },
+    {
+      "id": "b000035",
+      "kind": "blank",
+      "start_line": 124,
+      "end_line": 124,
+      "raw": "\n"
+    },
+    {
+      "id": "b000036",
+      "kind": "html",
+      "start_line": 125,
+      "end_line": 125,
+      "raw": "<!-- workspace-docs:readme:start -->\n"
+    },
+    {
+      "id": "b000037",
+      "kind": "heading",
+      "start_line": 126,
+      "end_line": 126,
+      "raw": "## Documentation entry points\n",
+      "level": 2,
+      "title": "Documentation entry points"
+    },
+    {
+      "id": "b000038",
+      "kind": "blank",
+      "start_line": 127,
+      "end_line": 127,
+      "raw": "\n"
+    },
+    {
+      "id": "b000039",
+      "kind": "list",
+      "start_line": 128,
+      "end_line": 131,
+      "raw": "- Human overview: this English `README.md`.\n- Agent instructions: [AGENT.md](AGENT.md).\n- Human documentation: [documentation index](docs/README.md).\n- Structured agent documentation: [agent index](docs/agent-index.json).\n",
+      "items": [
+        {
+          "marker": "-",
+          "text": "Human overview: this English `README.md`.",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Agent instructions: [AGENT.md](AGENT.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Human documentation: [documentation index](docs/README.md).",
+          "checked": null
+        },
+        {
+          "marker": "-",
+          "text": "Structured agent documentation: [agent index](docs/agent-index.json).",
+          "checked": null
+        }
+      ]
+    },
+    {
+      "id": "b000040",
+      "kind": "html",
+      "start_line": 132,
+      "end_line": 132,
+      "raw": "<!-- workspace-docs:readme:end -->\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "iiVisualCodec",
+      "anchor": "iivisualcodec",
+      "start_line": 1
+    },
+    {
+      "block_id": "b000031",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Documentation entry points",
+      "anchor": "documentation-entry-points",
+      "start_line": 117
+    },
+    {
+      "block_id": "b000037",
+      "parent_id": "b000001",
+      "level": 2,
+      "title": "Documentation entry points",
+      "anchor": "documentation-entry-points-1",
+      "start_line": 126
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000007",
+        "line": 26,
+        "text": "| `iiVisualCodec::Geometry` | Owned triangle meshes, normals, UVs, materials, textures, hierarchy/instances, affine transforms, units, winding and bounds; no 3D backend required |",
+        "basis": "lexical_match",
+        "context": "table"
+      },
+      {
+        "block_id": "b000015",
+        "line": 62,
+        "text": "archives and license notices must accompany any redistribution of FFmpeg; the",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000019",
+        "line": 84,
+        "text": "The backend prefix must accompany the installed SDK in the consuming kit.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 102,
+        "text": "must be published in full by the caller. CAD coordinates are millimetres;",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      },
+      {
+        "block_id": "b000025",
+        "line": 107,
+        "text": "final product distributions must maintain LGPL replacement and source conditions.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [
+      {
+        "block_id": "b000017",
+        "language": "sh",
+        "code": "python3 tools/bootstrap_dependencies.py --jobs 4\nexport PKG_CONFIG_PATH=\"$PWD/build/dependencies/prefix/lib/pkgconfig\"\ncmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release \\\n  -DCMAKE_PREFIX_PATH=\"$PWD/build/dependencies/prefix\" \\\n  -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_DISABLE_FIND_PACKAGE_Qt6=ON\ncmake --build build --parallel 4\nctest --test-dir build --output-on-failure\ncmake --install build --prefix \"$PWD/build/install\"\n"
+      }
+    ],
+    "links": [
+      {
+        "block_id": "b000023",
+        "label": "contracts",
+        "target": "docs/Contracts.md",
+        "kind": "relative",
+        "line": 90
+      },
+      {
+        "block_id": "b000023",
+        "label": "video",
+        "target": "docs/Video.md",
+        "kind": "relative",
+        "line": 90
+      },
+      {
+        "block_id": "b000023",
+        "label": "VR/AR processing",
+        "target": "docs/Spatial.md",
+        "kind": "relative",
+        "line": 91
+      },
+      {
+        "block_id": "b000023",
+        "label": "OpenUSD",
+        "target": "docs/USD.md",
+        "kind": "relative",
+        "line": 91
+      },
+      {
+        "block_id": "b000023",
+        "label": "Vision AI",
+        "target": "docs/VisionAI.md",
+        "kind": "relative",
+        "line": 92
+      },
+      {
+        "block_id": "b000023",
+        "label": "OpenCV",
+        "target": "docs/OpenCV.md",
+        "kind": "relative",
+        "line": 92
+      },
+      {
+        "block_id": "b000023",
+        "label": "geometry",
+        "target": "docs/Geometry.md",
+        "kind": "relative",
+        "line": 93
+      },
+      {
+        "block_id": "b000023",
+        "label": "3D assets",
+        "target": "docs/Asset3D.md",
+        "kind": "relative",
+        "line": 93
+      },
+      {
+        "block_id": "b000023",
+        "label": "CAD",
+        "target": "docs/CAD.md",
+        "kind": "relative",
+        "line": 93
+      },
+      {
+        "block_id": "b000023",
+        "label": "dependency and package delivery",
+        "target": "docs/Packaging.md",
+        "kind": "relative",
+        "line": 94
+      },
+      {
+        "block_id": "b000023",
+        "label": "0.4 verification",
+        "target": "docs/GeometryVerification.md",
+        "kind": "relative",
+        "line": 95
+      },
+      {
+        "block_id": "b000023",
+        "label": "0.3 verification",
+        "target": "docs/VisionVerification.md",
+        "kind": "relative",
+        "line": 96
+      },
+      {
+        "block_id": "b000023",
+        "label": "0.2 verification",
+        "target": "docs/Verification.md",
+        "kind": "relative",
+        "line": 96
+      },
+      {
+        "block_id": "b000029",
+        "label": "the runtime retirement contract",
+        "target": "docs/RuntimeRetirement.md",
+        "kind": "relative",
+        "line": 115
+      },
+      {
+        "block_id": "b000033",
+        "label": "AGENT.md",
+        "target": "AGENT.md",
+        "kind": "relative",
+        "line": 120
+      },
+      {
+        "block_id": "b000033",
+        "label": "documentation index",
+        "target": "docs/README.md",
+        "kind": "relative",
+        "line": 121
+      },
+      {
+        "block_id": "b000033",
+        "label": "agent index",
+        "target": "docs/agent-index.json",
+        "kind": "relative",
+        "line": 122
+      },
+      {
+        "block_id": "b000039",
+        "label": "AGENT.md",
+        "target": "AGENT.md",
+        "kind": "relative",
+        "line": 129
+      },
+      {
+        "block_id": "b000039",
+        "label": "documentation index",
+        "target": "docs/README.md",
+        "kind": "relative",
+        "line": 130
+      },
+      {
+        "block_id": "b000039",
+        "label": "agent index",
+        "target": "docs/agent-index.json",
+        "kind": "relative",
+        "line": 131
+      }
+    ],
+    "tables": [
+      {
+        "block_id": "b000007",
+        "columns": [
+          "Component / CMake target",
+          "Features"
+        ],
+        "rows": [
+          [
+            "`iiVisualCodec::Image`",
+            "PNG, JPEG, BMP, GIF, TGA, composite PSD, WebP and TIFF decoding; PNG/JPEG/BMP/TGA/WebP/TIFF encoding; ICC conversion and thumbnails"
+          ],
+          [
+            "`iiVisualCodec::Spatial`",
+            "Packed stereo split/join, 360° equirectangular perspective viewports, camera intrinsics, poses and depth-to-world point clouds"
+          ],
+          [
+            "`iiVisualCodec::Video`",
+            "Bounded memory demux/decode/encode, RGBA frames, rational timestamps, MP4/MOV/Matroska/AVI and standard spherical/stereo metadata through FFmpeg"
+          ],
+          [
+            "`iiVisualCodec::USD`",
+            "Native OpenUSD stages, USDA/USDC/USDZ, meshes, cameras, Preview Surface materials and textures, point clouds, transforms and time samples"
+          ],
+          [
+            "`iiVisualCodec::Vision`",
+            "Objects, boxes, keypoints, masks, tensors, model/preprocessor/detector interfaces, YOLO decoding, source coordinates, NMS and classification"
+          ],
+          [
+            "`iiVisualCodec::OpenCV`",
+            "Owned Mat interop, image operations, Canny/regions, ORB, optical flow, annotation and vision preprocessing"
+          ],
+          [
+            "`iiVisualCodec::Geometry`",
+            "Owned triangle meshes, normals, UVs, materials, textures, hierarchy/instances, affine transforms, units, winding and bounds; no 3D backend required"
+          ],
+          [
+            "`iiVisualCodec::Asset3D`",
+            "Memory-only Assimp static asset exchange: glTF/GLB, OBJ/MTL, STL, PLY, COLLADA and FBX; 3DS import"
+          ],
+          [
+            "`iiVisualCodec::CAD`",
+            "Open CASCADE exact shapes, primitives, extrusion, Boolean operations, metrics, tessellation, STEP/BREP memory exchange and explicit IGES file input"
+          ],
+          [
+            "`iiVisualCodec::iiVisualCodec`",
+            "All requested package components"
+          ]
+        ]
+      }
+    ]
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

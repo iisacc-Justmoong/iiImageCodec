@@ -1,0 +1,181 @@
+{
+  "format": "iisacc.agent-document-index",
+  "schema_version": 1,
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "documentation_root": "docs",
+  "agent_schema": "docs/agent-document.schema.json",
+  "documents": [
+    {
+      "document_id": "urn:iisacc:document:6b6dbfe13bcdba259bced822ad2c98a6df385e43393847dc5a9ba69b51c7386d",
+      "source": "AGENT.md",
+      "agent_json": "docs/entrypoints/AGENT.agent.json",
+      "source_sha256": "634fd38aa8772cf8404f848142e3aabc3f5ef98468358ebc9cd5b3a00e0bed50",
+      "role": "instructions"
+    },
+    {
+      "document_id": "urn:iisacc:document:71c31649c772bd6a75544e817aff9aa05383a097df5b186022a4cce4ed5415d3",
+      "source": "README.md",
+      "agent_json": "docs/entrypoints/README.agent.json",
+      "source_sha256": "d4e60b9b048c391792d5b6af17db6f791e0f9b0f82a8087e2ced18b0ce17bc61",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:2068e21fbc2d0551a940ab871088d46811d5f28c5c9852ab80a26020b5f3919c",
+      "source": "docs/Asset3D.md",
+      "agent_json": "docs/Asset3D.agent.json",
+      "source_sha256": "09e3e0c037f6444dae276aba2ca96e1b7f089085f5d2313fcbc819f4bd5c0c68",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:526d1870907997e9ba71390287629ae5739d9b601f536c94077a623449540670",
+      "source": "docs/CAD.md",
+      "agent_json": "docs/CAD.agent.json",
+      "source_sha256": "0a4d38c546d79805fd51ec9c4300ff75ab3cbd669be8d15762617c39b1d4c40d",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:220eaa013f4ec4ce36c34ea4212bd469f90a3a60f1cf0ff0ecb55f294046a03a",
+      "source": "docs/ColorManagement.md",
+      "agent_json": "docs/ColorManagement.agent.json",
+      "source_sha256": "5c7c58ee1222bfd828d91e4d3068d1e3c26778c4d864e132266f487be14d5d10",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:f751cb3d5f31d6bbbc206663f0eb8a4becd92b546072ae3b1d22b4aa7649aa69",
+      "source": "docs/Contracts.md",
+      "agent_json": "docs/Contracts.agent.json",
+      "source_sha256": "8ac00102938af30c7fb32cabedf43c6716af76f32de9961dbca3b4aff4961d95",
+      "role": "reference"
+    },
+    {
+      "document_id": "urn:iisacc:document:affea32c2b3c6aa46dff95dfa436862dbfc0a67fdcb3feaabb6cb32260d21981",
+      "source": "docs/Geometry.md",
+      "agent_json": "docs/Geometry.agent.json",
+      "source_sha256": "9ff1c806f372dab12d57db544ad3543e569e119fd0e79e955894803be7a96f39",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:5ed9264de75987c450ef32adb658ad6fc9bf8d53fae46af750362daa17be970a",
+      "source": "docs/GeometryVerification.md",
+      "agent_json": "docs/GeometryVerification.agent.json",
+      "source_sha256": "f01268dc263d95f22eac736dc8b4dc78f73734daa67e8e6b882e6025fb13cdf4",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:378de623fcf25491f070d6167a526c371f79041a92fb09289ad28d85b7cdac33",
+      "source": "docs/NativeFormats.md",
+      "agent_json": "docs/NativeFormats.agent.json",
+      "source_sha256": "7eda1bef9d38950223681cb1275a2176ff133bbe613f2c1e93eae290d91002a8",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:7fb4846ac41f304b1d8152fb49ce6e4ef9d9b8bd6c1b52c5454226a04ad100ff",
+      "source": "docs/OpenCV.md",
+      "agent_json": "docs/OpenCV.agent.json",
+      "source_sha256": "b1d855177526c8f1dbd4aad36cc0e96ccd468f274608a44b00f9bddddf50592d",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:58cb520811e6848839c66c260ead943b4890cb137c126cce323a8286d29bb3f2",
+      "source": "docs/Packaging.md",
+      "agent_json": "docs/Packaging.agent.json",
+      "source_sha256": "4eccd2ec18bb0e3df1e662fc6ac577655f312e0a17c170611558c6c5ce9f7149",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:eedfe59e6bbc41f7bda4f3c0e66c4a8158b60745e67b482c4cabdae880584425",
+      "source": "docs/README.md",
+      "agent_json": "docs/README.agent.json",
+      "source_sha256": "b5739ac6a814186f0630aff7d450ed53a0188ee3efc148222dbe8cea431558ee",
+      "role": "overview"
+    },
+    {
+      "document_id": "urn:iisacc:document:7b3095cfdecf2e093099159fc3daad2f34ae1c624759f2ee188fc7eb4d69591b",
+      "source": "docs/RuntimeRetirement.md",
+      "agent_json": "docs/RuntimeRetirement.agent.json",
+      "source_sha256": "8a5837e55e33719aeed12052aefc41bffc6768bb4d1ad178d2e40e242a6d885a",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2a3f57bb550c9d89a8fc9e8f6ac43cf6f422ba18570159ddd9b2c7c8ebe99746",
+      "source": "docs/Spatial.md",
+      "agent_json": "docs/Spatial.agent.json",
+      "source_sha256": "7e5a0fab2c46a829b041c03516322770a533cfd2c6a3e67ed7109621792f44d3",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:d69aa7d8e1cedb75ea5a3360775bf681e59a54045b3f5372087b065bcd2b014d",
+      "source": "docs/Thumbnails.md",
+      "agent_json": "docs/Thumbnails.agent.json",
+      "source_sha256": "1cfcdc7d7ae8abe34ab45f775606e24c27b3b50ab5777af86c008d7cb59e4959",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:8472cf5eef6361e55810cec5f20c74532dc217cfc6ef831b929883e3ab69fe64",
+      "source": "docs/USD.md",
+      "agent_json": "docs/USD.agent.json",
+      "source_sha256": "270c58e53a156e1c7454cc32c732db5bfc36634e88ea5cefcd6c4baf0ce8f194",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:5032de34abc09327f75ecb1759c16b92b51526e7d8ae9fc3534538a9d83dc6e7",
+      "source": "docs/Verification.md",
+      "agent_json": "docs/Verification.agent.json",
+      "source_sha256": "3bbbee59f0dc928d9a63e0eceff293ff0e28fd956c3529f0c981be652d2135f5",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:887460cd332ba926214722b489916141387a7efb4ea4469e8c01b424511da208",
+      "source": "docs/Video.md",
+      "agent_json": "docs/Video.agent.json",
+      "source_sha256": "97b4b53ceb182f4ce80870ee5c56a3867e390ded32e16966612ea3d1c8fa2843",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:69a5e05e64a2a9526cb093571d270462d423b5922bb9ffd0fde473cff8d4bf98",
+      "source": "docs/VisionAI.md",
+      "agent_json": "docs/VisionAI.agent.json",
+      "source_sha256": "f30ccd31e0c069002379720edeb09c52d48ae304228b105ab6be171157f5d4b6",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:2f20bab68ed5bee46d40f937d0ee4b3725f08b1282bd079d432208ba5102224e",
+      "source": "docs/VisionVerification.md",
+      "agent_json": "docs/VisionVerification.agent.json",
+      "source_sha256": "ab2fe05785159c8e1f0b5cfafc451b2bc9ec3d974e56da069cb4f0964cb4d406",
+      "role": "evidence"
+    },
+    {
+      "document_id": "urn:iisacc:document:ef9ffc75377deda8714f27bae431676d23d87683ffa394c2a474aca133b0fafb",
+      "source": "docs/documentation-structure.md",
+      "agent_json": "docs/documentation-structure.agent.json",
+      "source_sha256": "747bc9506ad8508b31cb4297f15f134ac5daec89f6b2b8d373b256bc21a79567",
+      "role": "guide"
+    },
+    {
+      "document_id": "urn:iisacc:document:f33bb204db6112b0f6369d3c3aa9264d8b17aa9edb6221312e581e32acc191d3",
+      "source": "example/README.md",
+      "agent_json": "docs/mirrors/example/README.agent.json",
+      "source_sha256": "e06f7d44f27edbd8a18fe3c5652efcf530ab4172476dfab13d959b862b1b8e6b",
+      "role": "overview"
+    }
+  ],
+  "layout": {
+    "human_entry": "README.md",
+    "agent_entry": "AGENT.md",
+    "human_format": "markdown",
+    "agent_format": "structured_json",
+    "source_authority": "markdown"
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

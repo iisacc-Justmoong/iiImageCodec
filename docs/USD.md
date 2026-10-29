@@ -1,0 +1,19 @@
+# OpenUSD 장면 입출력
+
+`UsdCodec.h`와 `iiVisualCodec::USD`는 공식 OpenUSD를 호출한다. USDA 텍스트를 직접 일부 해석하는 대체 포맷 구현이 아니다. 공개 API에는 pxr 타입이 없으며 Document의 비공개 구현이 실제 stage를 소유한다. 복사한 Document는 동일 stage를 공유한다. 같은 Document에 접근하는 스레드는 호출자가 동기화해야 한다.
+
+`Document::create()`는 /World default prim과 단위·up axis·시간 기준을 만든다. `from_usda()`/`to_usda()`는 메모리 USDA 왕복을 제공한다. `read()`는 USDA·USDC·USDZ 파일을 네이티브 resolver로 읽고, payload는 기본적으로 로드하지 않는다. 참조 레이어·텍스처 같은 외부 에셋은 OpenUSD가 해결하므로 신뢰할 수 있는 로컬 소스를 사용한다. 이 API는 외부 에셋 전체 크기나 사용자 resolver 플러그인의 동작을 차단하는 샌드박스가 아니다.
+
+Mesh는 메시 경로·정점·면별 정점 수·인덱스·정점 보간 normal/UV·로컬 행렬·재질 바인딩을 제공한다. 편집 시 인덱스 범위, 다각형 크기, normal/UV 원소 수와 유한 좌표를 검사한다. query는 원본 USD의 normal/UV 배열도 읽을 수 있지만 임의 보간 normal이나 추가 primvar 전체를 Mesh 값 타입으로 재작성하면 자동 보존하지 않는다. 원본 루트 레이어 전체를 to_usda()/write()로 보존하는 경로를 사용해야 한다.
+
+Camera는 초점거리·센서 aperture·clipping과 로컬 행렬을 제공한다. 광학 값은 USD 카메라 속성의 단위를 그대로 사용한다. 행렬은 row-major, row-vector 규약으로 translation이 12~14번 원소에 있다. AR 카메라 좌표를 전달할 때 stage의 metres_per_unit과 같은 단위를 사용해야 한다.
+
+materials()는 Preview Surface 재질의 스칼라·색·연결된 텍스처 경로를 조회한다. 다른 셰이더 네트워크는 루트 레이어에서 유지하며 이 편의 목록에는 포함하지 않는다.
+
+Material은 UsdPreviewSurface의 diffuseColor/opacity/roughness/metallic을 작성하고, 선택한 diffuse texture를 UsdUVTexture 및 st primvar reader에 연결한다. Points는 AR 깊이 점군을 UsdGeomPoints로 작성한다. Mesh·Camera·Points의 선택적 time 값은 stage time code로 실제 시간 샘플을 만든다. 일반 루트 레이어는 편의 API가 알지 못하는 스키마·계층·variant·속성도 계속 보유한다.
+
+파일 경로는 std::filesystem::path로 받고 OpenUSD 경계에서 UTF-8로 변환한다. 한국어·공백이 포함된 파일명도 같은 경로 계약을 사용한다.
+
+`write()`는 Format과 확장자가 일치하는 새 파일만 만든다. USDA/USDC는 루트 레이어를 내보내므로 외부 상대 에셋 경로를 다른 위치로 옮길 때 원본과 같은 resolver 구성을 유지해야 한다. USDZ는 현재 선택된 composition을 flatten한 USDC 루트와 필요한 에셋을 공식 패키저로 묶는다. variant 선택과 참조 구조 자체를 USDZ에 원형 보존하는 export는 아니다. ARKit 장치에서의 렌더링·상호작용 검증은 별도이다.
+
+입력 기본 한도는 루트 파일/USDA 256 MiB, 출력 256 MiB, prim 100,000개, 정점 10,000,000개와 인덱스 30,000,000개이다. root load와 기본값 조회 및 결과 배열을 검사하지만 OpenUSD의 모든 임시 할당·전체 종속 에셋·시간 샘플 총량을 누적 추적하지 않는다. 내보내기는 출력 부모 디렉터리 안의 전용 임시 디렉터리에서 완료한 뒤 새 목적지로 복사하며 실패·종료 때 임시 자료를 회수한다. 원자적 교체·최종 공개는 호출자의 iiFileProvider 계층이 담당한다.

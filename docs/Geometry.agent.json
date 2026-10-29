@@ -1,0 +1,121 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:affea32c2b3c6aa46dff95dfa436862dbfc0a67fdcb3feaabb6cb32260d21981",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/Geometry.md",
+    "sha256": "9ff1c806f372dab12d57db544ad3543e569e119fd0e79e955894803be7a96f39",
+    "bytes": 1174,
+    "line_count": 9,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "3D 공통 데이터 계약",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 3D 공통 데이터 계약\n",
+      "level": 1,
+      "title": "3D 공통 데이터 계약"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "0.4의 `Geometry`는 표준 C++23으로 메시·삼각형 인덱스·법선·UV·재질·소유 텍스처·노드·인스턴스를 표현한다. `Asset3D`와 `CAD`가 이 계층에 의존한다. Geometry 자체는 Assimp와 Open CASCADE를 탐색하지 않는다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "행 우선 행렬에 열벡터를 곱하며 이동은 `[3,7,11]`이다. USD의 기존 행벡터 계약과 구분한다. 부모 노드는 자식보다 앞에 배치한다. 순환·특이 행렬·비유한 좌표·범위 밖 인덱스·속성 개수 불일치를 거부한다.\n"
+    },
+    {
+      "id": "b000006",
+      "kind": "blank",
+      "start_line": 6,
+      "end_line": 6,
+      "raw": "\n"
+    },
+    {
+      "id": "b000007",
+      "kind": "paragraph",
+      "start_line": 7,
+      "end_line": 7,
+      "raw": "`flatten`은 계층과 인스턴스를 굽고 미터·Y 위쪽 좌표계로 변환한다. Z 위쪽은 `(x,y,z) → (x,z,-y)`로 변환한다. 반사 행렬은 삼각형 winding을 뒤집고 법선은 역전치로 변환한다. `bounds`는 같은 정규화 좌표계의 경계이다. 생성 법선은 면적 가중 정점 법선이며 축퇴 삼각형은 영벡터가 될 수 있다.\n"
+    },
+    {
+      "id": "b000008",
+      "kind": "blank",
+      "start_line": 8,
+      "end_line": 8,
+      "raw": "\n"
+    },
+    {
+      "id": "b000009",
+      "kind": "paragraph",
+      "start_line": 9,
+      "end_line": 9,
+      "raw": "입력 및 인스턴스 확장 후의 정점·인덱스·메시 수와 깊이·참조 수를 각각 제한한다. 이 한도는 백엔드 파서의 모든 내부 임시 할당을 제한하는 샌드박스가 아니다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "3D 공통 데이터 계약",
+      "anchor": "3d-공통-데이터-계약",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [
+      {
+        "block_id": "b000003",
+        "line": 3,
+        "text": "0.4의 `Geometry`는 표준 C++23으로 메시·삼각형 인덱스·법선·UV·재질·소유 텍스처·노드·인스턴스를 표현한다. `Asset3D`와 `CAD`가 이 계층에 의존한다. Geometry 자체는 Assimp와 Open CASCADE를 탐색하지 않는다.",
+        "basis": "lexical_match",
+        "context": "paragraph"
+      }
+    ],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

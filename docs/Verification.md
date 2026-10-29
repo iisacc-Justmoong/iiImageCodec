@@ -1,0 +1,68 @@
+# iiVisualCodec 0.2 검증 기록
+
+이 문서는 0.2 시점의 기록이다. 현재 0.3의 Vision·OpenCV와 전체 회귀 검증은 VisionVerification.md를 따른다.
+
+검증일은 2026-10-27이며 실행 호스트는 macOS ARM64, Apple Clang 21이다. 소스·의존성·설치 스테이징·테스트 산출물은 이 저장소의 build/ 안에 두었다. 소스 디렉터리와 CMake 패키지는 iiVisualCodec으로 전환했고, SDK Workspace 등록·Windows 프로젝트 그래프·Qt-free 소비자와 관련 문서도 새 이름을 사용한다. GitHub 저장소명과 origin은 https://github.com/iisacc-Justmoong/iiVisualCodec 이다. 구현 변경은 로컬 작업 트리에 있으며 이 작업에서 구현 커밋·푸시는 수행하지 않았다.
+
+## 실행 결과
+
+| 검증 | 결과 | 증거 |
+| --- | --- | --- |
+| Release 전체 계약 | 8/8 통과 | build/verification.xml |
+| ASan·UBSan 전체 계약 | 8/8 통과 | build/asan/build/verification.xml |
+| 재배치 패키지의 새 API와 기존 이름 소비자 | 2/2 통과 | build/consumer/build/verification.xml |
+| FFmpeg/OpenUSD 검색을 끈 이미지 전용 소비자 | 1/1 통과 | build/image-consumer/build/verification.xml |
+| 외부 비디오·USD 도구 호환성 | 통과 | build/interoperability/report.json |
+| 설치 헤더·라이브러리 객체·실제 로드 경로 | 통과 | build/completion-evidence.json, build/consumer-libraries.log |
+| SDK 이름·등록 관련 테스트 | 5/5 통과 | SDK/tests/test_module_names.py |
+| Workspace 동기화 도구의 픽스처 테스트 | 11/11 통과 | SDK/tests/test_sync_workspace.py |
+
+8개 CTest 항목은 이미지 형식·색 관리·썸네일·VR/AR 공간 변환·비디오·USD·기존 API 호환·의존성 배포 도구이다. sanitizer 검증은 iiVisualCodec과 테스트에 적용되었으며, FFmpeg/OpenUSD/이미지 코덱 전체를 sanitizer로 재컴파일했다는 의미는 아니다.
+
+이미지는 기존 형식·알파·ICC·방향·한도 회귀를 유지했다. 공간 테스트는 좌·우 패킹 왕복, 실제 방향별 파노라마 샘플, 비유효 자세·FOV·stride, 카메라 깊이의 월드 미터 좌표를 검사한다.
+
+비디오는 FFV1 픽셀 왕복, MP4/MOV/AVI 프레임과 종료 flush, 증가하는 PTS, H.264 소프트웨어 인코딩, Matroska 및 MPEG-4/H.264 MP4의 스테레오·360도 메타데이터와 바이트·프레임·치수·손상 입력 경계를 검사했다. FFmpeg의 MP4 확장 허용과 Apple native-view 메타데이터 중복을 처리하여 equirectangular와 side_by_side가 실제 파일에 보존되는 것을 확인했다.
+
+USD는 USDA/USDC/USDZ의 메시 토폴로지·normal/UV·재질 바인딩·Preview Surface 값·텍스처·카메라·로컬 행렬·점군·시간 샘플·단위·up axis를 검사했다. 알 수 없는 사용자 속성을 루트 레이어에서 보존하고 잘못된 경로·인덱스·한도와 기존 목적지를 거절했다. 한국어·공백 파일명도 읽고 썼다.
+
+## 외부 도구 및 패키지 증거
+
+호스트 FFmpeg로 만든 H.264·HEVC·VP9 세 영상을 SDK의 LGPL 디코더로 읽어 치수·3프레임·실제 빨간 픽셀을 확인했다. SDK가 만든 FFV1/MPEG-4/MJPEG/H.264 컨테이너는 호스트 ffprobe로 프레임 수·코덱·시간 기준을 조사했고, 360도 영상의 Spherical Mapping 및 Stereo 3D가 함께 인식되었다. 외부 테스트 도구를 SDK에 링크하거나 배포 패키지에 포함하지 않았다.
+
+macOS의 /usr/bin/usdcat으로 USDA·USDC·USDZ와 텍스처 USDZ를 다시 읽었다. USDZ에는 USDC 루트와 실제 PNG 에셋이 있으며 ZIP payload의 비압축·64바이트 정렬도 확인했다. 테스트 명령과 출력은 tests/interoperability.py가 보고서에 기록한다.
+
+설치 prefix를 build/package에서 build/relocated로 옮긴 뒤 설치된 헤더·라이브러리만으로 소비자를 새로 구성했다. 소비자는 실제 PNG·비디오·AR 점군·USD 왕복과 기존 iiImageCodec PNG API를 실행했다. 현재 소스 헤더와 설치 헤더를 대조하고 정적 라이브러리는 archive 메타데이터 대신 각 객체 payload를 비교했다. DYLD_PRINT_LIBRARIES와 사용자 라이브러리 경로 환경변수 제거로 실제 로드 경로를 조사했다. SDK의 비시스템 공유 라이브러리는 재배치 prefix에서 로드되며 Qt·Homebrew 런타임은 포함하지 않는다.
+
+키트는 공유 LGPL FFmpeg 8.0.1, BSD OpenH264 2.6.0, OpenUSD 26.11.1 및 oneTBB 2021.12.0을 사용한다. 라이선스와 실제 빌드 명령, SHA-256 매니페스트 및 FFmpeg의 해당 원본 소스 archive를 배포 prefix에 포함했다. stage_package.py와 bootstrap_dependencies.py로 같은 구성을 다시 만들 수 있다.
+
+## 구분해야 하는 검증 범위
+
+Windows·Linux·모바일·WASM의 실행, VR 헤드셋 표시·추적, AR SLAM·앵커 세션과 ARKit 기기 렌더링을 실행한 것은 아니다. VR/AR 지원은 공간 영상·스테레오·카메라·깊이·점군·USDZ 처리의 코드와 파일 입출력 증거이다. HEVC 하드웨어 인코딩, 추가 VP9/AV1 인코더 등 백엔드 선택 기능은 별도 환경에서 확인해야 한다. API별 한계는 Video.md·Spatial.md·USD.md에 있다.
+
+사용자 ~/.local 설치본과 실행 중인 제품 앱을 바꾸지 않고 build/relocated에 전달 가능한 설치 키트를 만들었다. 현재 키트는 macOS ARM64용이다.
+
+SDK 전체 등록 검사 두 그룹은 별도로 실패했다. tests/test_sdk_publication.py의 3개 중 1개와 tests/test_windows_verification.py의 15개 중 1개가 기존 iiVirtualizer 등록 누락을 보고했고, 후자 7개는 Windows 환경 조건으로 건너뛰었다. 당시 Git HEAD의 두 등록 파일에도 iiVirtualizer가 없었음을 build/root-baseline-audit.json에 기록했다. 이번 iiVisualCodec 이름 전환 검사 5개는 통과했으며 관련 없는 등록·동시 작업은 변경하지 않았다. SDK 전체가 모두 통과했다고 해석하지 않는다.
+
+## 최종 감사 재실행
+
+Packaging.md의 의존성 빌드·배포 prefix 준비 후 다음 기록을 만든다. 기존 prefix를 사용하는 반복 검증은 설치 스크립트가 사용자 설치본을 변경하지 않도록 build/ 안에서 수행한다.
+
+```sh
+ctest --test-dir build --output-on-failure --output-junit verification.xml
+cmake -S . -B build/asan/build -G Ninja -DCMAKE_BUILD_TYPE=Debug \
+  -DIIVISUALCODEC_SANITIZE=ON -DCMAKE_FIND_FRAMEWORK=LAST \
+  -DCMAKE_PREFIX_PATH="$PWD/build/dependencies/prefix;$PWD/../build/congregation-native/prefix"
+cmake --build build/asan/build --parallel 4
+ctest --test-dir build/asan/build --output-on-failure --output-junit verification.xml
+ctest --test-dir build/consumer/build --output-on-failure --output-junit verification.xml
+cmake -S tests/consumer -B build/image-consumer/build -G Ninja \
+  -DVISUAL_IMAGE_ONLY=ON -DCMAKE_PREFIX_PATH="$PWD/build/relocated" \
+  -DCMAKE_FIND_FRAMEWORK=LAST -DCMAKE_DISABLE_FIND_PACKAGE_pxr=ON \
+  -DCMAKE_DISABLE_FIND_PACKAGE_PkgConfig=ON
+cmake --build build/image-consumer/build --parallel 4
+ctest --test-dir build/image-consumer/build --output-on-failure --output-junit verification.xml
+python3 -B tests/interoperability.py
+python3 -B tests/package_audit.py
+```
+
+PKG_CONFIG_PATH는 Packaging.md의 해당 build 또는 relocated prefix 설정을 사용한다. 검사 대상 실행 파일은 build/consumer/build/pipeline이다.
