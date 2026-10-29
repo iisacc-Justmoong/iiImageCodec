@@ -1,0 +1,85 @@
+{
+  "format": "iisacc.agent-document",
+  "schema_version": 1,
+  "document_id": "urn:iisacc:document:3d9917c028aff99b2648ef19058c62c583aac680880829682b7e0aac38a3c1fc",
+  "project": {
+    "id": "urn:iisacc:project:SDK%2FiiVisualCodec",
+    "name": "iiVisualCodec",
+    "root": "SDK/iiVisualCodec",
+    "kind": "sdk"
+  },
+  "source": {
+    "path": "docs/SourceLayout.md",
+    "sha256": "ba088ff79d34d5e7218b98705600874400cee08dd7e26b27178ee56ba78a3577",
+    "bytes": 631,
+    "line_count": 5,
+    "encoding": "utf-8",
+    "language": "ko"
+  },
+  "document": {
+    "title": "시각 코덱 소스 책임 분류",
+    "role": "guide",
+    "authority": "markdown_source"
+  },
+  "blocks": [
+    {
+      "id": "b000001",
+      "kind": "heading",
+      "start_line": 1,
+      "end_line": 1,
+      "raw": "# 시각 코덱 소스 책임 분류\n",
+      "level": 1,
+      "title": "시각 코덱 소스 책임 분류"
+    },
+    {
+      "id": "b000002",
+      "kind": "blank",
+      "start_line": 2,
+      "end_line": 2,
+      "raw": "\n"
+    },
+    {
+      "id": "b000003",
+      "kind": "paragraph",
+      "start_line": 3,
+      "end_line": 3,
+      "raw": "공개 헤더와 구현은 `src/Image`, `src/Spatial`, `src/Video`, `src/Vision`, `src/Geometry`, `src/Asset3D`, `src/CAD`, `src/USD`로 나눈다. 공통 내부 정의와 전체 진입 헤더는 `src/Core`, 이전 이미지 패키지의 헤더 전용 별칭은 `src/Compatibility`에 둔다.\n"
+    },
+    {
+      "id": "b000004",
+      "kind": "blank",
+      "start_line": 4,
+      "end_line": 4,
+      "raw": "\n"
+    },
+    {
+      "id": "b000005",
+      "kind": "paragraph",
+      "start_line": 5,
+      "end_line": 5,
+      "raw": "빌드 forwarding 헤더와 설치된 공개 헤더는 기존 `<iiVisualCodec/...>` 및 `<iiImageCodec/ImageCodec.h>` 경로와 개별 CMake 구성요소를 유지한다. `tests/source_layout.cmake`가 책임별 배치를, `tests/package_audit.py`가 설치 헤더의 원문 일치를 검사한다.\n"
+    }
+  ],
+  "outline": [
+    {
+      "block_id": "b000001",
+      "parent_id": null,
+      "level": 1,
+      "title": "시각 코덱 소스 책임 분류",
+      "anchor": "시각-코덱-소스-책임-분류",
+      "start_line": 1
+    }
+  ],
+  "indexes": {
+    "directive_candidates": [],
+    "commands": [],
+    "links": [],
+    "tables": []
+  },
+  "provenance": {
+    "generator": "workspace-docs",
+    "version": "1.0.0",
+    "profile": "lossless-blocks-v1",
+    "derived": true
+  }
+}

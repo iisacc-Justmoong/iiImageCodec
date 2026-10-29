@@ -1,5 +1,5 @@
 #pragma once
-#include "Spatial.h"
+#include <iiVisualCodec/Spatial.h>
 #include "Pixel_p.h"
 #include <cmath>
 

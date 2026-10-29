@@ -1,5 +1,5 @@
 #pragma once
-#include "ImageCodec.h"
+#include <iiVisualCodec/ImageCodec.h>
 #include <algorithm>
 #include <limits>
 

@@ -10,9 +10,9 @@
   },
   "source": {
     "path": "docs/README.md",
-    "sha256": "b5739ac6a814186f0630aff7d450ed53a0188ee3efc148222dbe8cea431558ee",
-    "bytes": 1891,
-    "line_count": 31,
+    "sha256": "4a1401f622c6fd0d3d55342f65cf3265ca588e0a598bac75c38552811deffecf",
+    "bytes": 1971,
+    "line_count": 32,
     "encoding": "utf-8",
     "language": "en"
   },
@@ -79,8 +79,8 @@
       "id": "b000008",
       "kind": "table",
       "start_line": 8,
-      "end_line": 30,
-      "raw": "| Document | Agent JSON |\n| --- | --- |\n| [`AGENT.md`](../AGENT.md) | [JSON](entrypoints/AGENT.agent.json) |\n| [`README.md`](../README.md) | [JSON](entrypoints/README.agent.json) |\n| [`docs/Asset3D.md`](Asset3D.md) | [JSON](Asset3D.agent.json) |\n| [`docs/CAD.md`](CAD.md) | [JSON](CAD.agent.json) |\n| [`docs/ColorManagement.md`](ColorManagement.md) | [JSON](ColorManagement.agent.json) |\n| [`docs/Contracts.md`](Contracts.md) | [JSON](Contracts.agent.json) |\n| [`docs/Geometry.md`](Geometry.md) | [JSON](Geometry.agent.json) |\n| [`docs/GeometryVerification.md`](GeometryVerification.md) | [JSON](GeometryVerification.agent.json) |\n| [`docs/NativeFormats.md`](NativeFormats.md) | [JSON](NativeFormats.agent.json) |\n| [`docs/OpenCV.md`](OpenCV.md) | [JSON](OpenCV.agent.json) |\n| [`docs/Packaging.md`](Packaging.md) | [JSON](Packaging.agent.json) |\n| [`docs/RuntimeRetirement.md`](RuntimeRetirement.md) | [JSON](RuntimeRetirement.agent.json) |\n| [`docs/Spatial.md`](Spatial.md) | [JSON](Spatial.agent.json) |\n| [`docs/Thumbnails.md`](Thumbnails.md) | [JSON](Thumbnails.agent.json) |\n| [`docs/USD.md`](USD.md) | [JSON](USD.agent.json) |\n| [`docs/Verification.md`](Verification.md) | [JSON](Verification.agent.json) |\n| [`docs/Video.md`](Video.md) | [JSON](Video.agent.json) |\n| [`docs/VisionAI.md`](VisionAI.md) | [JSON](VisionAI.agent.json) |\n| [`docs/VisionVerification.md`](VisionVerification.md) | [JSON](VisionVerification.agent.json) |\n| [`docs/documentation-structure.md`](documentation-structure.md) | [JSON](documentation-structure.agent.json) |\n| [`example/README.md`](../example/README.md) | [JSON](mirrors/example/README.agent.json) |\n",
+      "end_line": 31,
+      "raw": "| Document | Agent JSON |\n| --- | --- |\n| [`AGENT.md`](../AGENT.md) | [JSON](entrypoints/AGENT.agent.json) |\n| [`README.md`](../README.md) | [JSON](entrypoints/README.agent.json) |\n| [`docs/Asset3D.md`](Asset3D.md) | [JSON](Asset3D.agent.json) |\n| [`docs/CAD.md`](CAD.md) | [JSON](CAD.agent.json) |\n| [`docs/ColorManagement.md`](ColorManagement.md) | [JSON](ColorManagement.agent.json) |\n| [`docs/Contracts.md`](Contracts.md) | [JSON](Contracts.agent.json) |\n| [`docs/Geometry.md`](Geometry.md) | [JSON](Geometry.agent.json) |\n| [`docs/GeometryVerification.md`](GeometryVerification.md) | [JSON](GeometryVerification.agent.json) |\n| [`docs/NativeFormats.md`](NativeFormats.md) | [JSON](NativeFormats.agent.json) |\n| [`docs/OpenCV.md`](OpenCV.md) | [JSON](OpenCV.agent.json) |\n| [`docs/Packaging.md`](Packaging.md) | [JSON](Packaging.agent.json) |\n| [`docs/RuntimeRetirement.md`](RuntimeRetirement.md) | [JSON](RuntimeRetirement.agent.json) |\n| [`docs/SourceLayout.md`](SourceLayout.md) | [JSON](SourceLayout.agent.json) |\n| [`docs/Spatial.md`](Spatial.md) | [JSON](Spatial.agent.json) |\n| [`docs/Thumbnails.md`](Thumbnails.md) | [JSON](Thumbnails.agent.json) |\n| [`docs/USD.md`](USD.md) | [JSON](USD.agent.json) |\n| [`docs/Verification.md`](Verification.md) | [JSON](Verification.agent.json) |\n| [`docs/Video.md`](Video.md) | [JSON](Video.agent.json) |\n| [`docs/VisionAI.md`](VisionAI.md) | [JSON](VisionAI.agent.json) |\n| [`docs/VisionVerification.md`](VisionVerification.md) | [JSON](VisionVerification.agent.json) |\n| [`docs/documentation-structure.md`](documentation-structure.md) | [JSON](documentation-structure.agent.json) |\n| [`example/README.md`](../example/README.md) | [JSON](mirrors/example/README.agent.json) |\n",
       "columns": [
         "Document",
         "Agent JSON"
@@ -135,6 +135,10 @@
           "[JSON](RuntimeRetirement.agent.json)"
         ],
         [
+          "[`docs/SourceLayout.md`](SourceLayout.md)",
+          "[JSON](SourceLayout.agent.json)"
+        ],
+        [
           "[`docs/Spatial.md`](Spatial.md)",
           "[JSON](Spatial.agent.json)"
         ],
@@ -175,8 +179,8 @@
     {
       "id": "b000009",
       "kind": "html",
-      "start_line": 31,
-      "end_line": 31,
+      "start_line": 32,
+      "end_line": 32,
       "raw": "<!-- workspace-docs:document-map:end -->\n"
     }
   ],
@@ -372,129 +376,143 @@
       },
       {
         "block_id": "b000008",
+        "label": "`docs/SourceLayout.md`",
+        "target": "SourceLayout.md",
+        "kind": "relative",
+        "line": 22
+      },
+      {
+        "block_id": "b000008",
+        "label": "JSON",
+        "target": "SourceLayout.agent.json",
+        "kind": "relative",
+        "line": 22
+      },
+      {
+        "block_id": "b000008",
         "label": "`docs/Spatial.md`",
         "target": "Spatial.md",
         "kind": "relative",
-        "line": 22
+        "line": 23
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "Spatial.agent.json",
         "kind": "relative",
-        "line": 22
+        "line": 23
       },
       {
         "block_id": "b000008",
         "label": "`docs/Thumbnails.md`",
         "target": "Thumbnails.md",
         "kind": "relative",
-        "line": 23
+        "line": 24
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "Thumbnails.agent.json",
         "kind": "relative",
-        "line": 23
+        "line": 24
       },
       {
         "block_id": "b000008",
         "label": "`docs/USD.md`",
         "target": "USD.md",
         "kind": "relative",
-        "line": 24
+        "line": 25
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "USD.agent.json",
         "kind": "relative",
-        "line": 24
+        "line": 25
       },
       {
         "block_id": "b000008",
         "label": "`docs/Verification.md`",
         "target": "Verification.md",
         "kind": "relative",
-        "line": 25
+        "line": 26
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "Verification.agent.json",
         "kind": "relative",
-        "line": 25
+        "line": 26
       },
       {
         "block_id": "b000008",
         "label": "`docs/Video.md`",
         "target": "Video.md",
         "kind": "relative",
-        "line": 26
+        "line": 27
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "Video.agent.json",
         "kind": "relative",
-        "line": 26
+        "line": 27
       },
       {
         "block_id": "b000008",
         "label": "`docs/VisionAI.md`",
         "target": "VisionAI.md",
         "kind": "relative",
-        "line": 27
+        "line": 28
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "VisionAI.agent.json",
         "kind": "relative",
-        "line": 27
+        "line": 28
       },
       {
         "block_id": "b000008",
         "label": "`docs/VisionVerification.md`",
         "target": "VisionVerification.md",
         "kind": "relative",
-        "line": 28
+        "line": 29
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "VisionVerification.agent.json",
         "kind": "relative",
-        "line": 28
+        "line": 29
       },
       {
         "block_id": "b000008",
         "label": "`docs/documentation-structure.md`",
         "target": "documentation-structure.md",
         "kind": "relative",
-        "line": 29
+        "line": 30
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "documentation-structure.agent.json",
         "kind": "relative",
-        "line": 29
+        "line": 30
       },
       {
         "block_id": "b000008",
         "label": "`example/README.md`",
         "target": "../example/README.md",
         "kind": "relative",
-        "line": 30
+        "line": 31
       },
       {
         "block_id": "b000008",
         "label": "JSON",
         "target": "mirrors/example/README.agent.json",
         "kind": "relative",
-        "line": 30
+        "line": 31
       }
     ],
     "tables": [
@@ -552,6 +570,10 @@
           [
             "[`docs/RuntimeRetirement.md`](RuntimeRetirement.md)",
             "[JSON](RuntimeRetirement.agent.json)"
+          ],
+          [
+            "[`docs/SourceLayout.md`](SourceLayout.md)",
+            "[JSON](SourceLayout.agent.json)"
           ],
           [
             "[`docs/Spatial.md`](Spatial.md)",

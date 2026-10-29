@@ -1,5 +1,7 @@
 # iiVisualCodec
 
+Sources and adjacent headers are organized by codec responsibility under `src/`; see [source layout](docs/SourceLayout.md). Public and legacy include names remain unchanged.
+
 iiVisualCodec is iiSDK's Qt-free C++23 visual media SDK. It replaces
 **iiImageCodec** and provides independent image, video, VR/AR, OpenUSD,
 Vision AI, OpenCV, static 3D assets and exact CAD components. Version 0.4 adds

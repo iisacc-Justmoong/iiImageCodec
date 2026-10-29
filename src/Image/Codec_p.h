@@ -1,5 +1,5 @@
 #pragma once
-#include "ImageCodec.h"
+#include <iiVisualCodec/ImageCodec.h>
 namespace ii::visual::image::detail {
 Result<Info> inspect_basic(std::span<const std::uint8_t>,Limits);
 Result<Image> decode_basic(std::span<const std::uint8_t>,Limits);

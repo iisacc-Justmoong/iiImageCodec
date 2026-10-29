@@ -1,5 +1,5 @@
 #pragma once
-#include "Geometry.h"
+#include <iiVisualCodec/Geometry.h>
 #include <string_view>
 
 namespace ii::visual::asset3d {

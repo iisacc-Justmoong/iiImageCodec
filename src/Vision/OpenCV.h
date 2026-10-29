@@ -1,5 +1,5 @@
 #pragma once
-#include "Vision.h"
+#include <iiVisualCodec/Vision.h>
 
 namespace ii::visual::opencv {
 using image::Result;

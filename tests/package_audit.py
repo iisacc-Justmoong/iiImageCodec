@@ -10,6 +10,12 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
 PREFIX = ROOT / "build/relocated"
+HEADER_DIRECTORIES = {
+    "VisualCodec.h": "Core", "ImageCodec.h": "Image", "Spatial.h": "Spatial",
+    "VideoCodec.h": "Video", "UsdCodec.h": "USD", "Vision.h": "Vision",
+    "OpenCV.h": "Vision", "OpenCVBridge.h": "Vision", "Geometry.h": "Geometry",
+    "Asset3D.h": "Asset3D", "CadCodec.h": "CAD", "UsdGeometry.h": "USD",
+}
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -36,8 +42,9 @@ def main():
         assert int(xml.attrib["tests"]) == count
         assert int(xml.attrib.get("failures", 0)) == 0 and int(xml.attrib.get("errors", 0)) == 0
     report["headers"] = {}
-    for name in ("VisualCodec.h", "ImageCodec.h", "Spatial.h", "VideoCodec.h", "UsdCodec.h", "Vision.h", "OpenCV.h", "OpenCVBridge.h", "Geometry.h", "Asset3D.h", "CadCodec.h", "UsdGeometry.h"):
-        source, staged = ROOT / "src/iiVisualCodec" / name, PREFIX / "include/iiVisualCodec" / name
+    for name, directory in HEADER_DIRECTORIES.items():
+        source = ROOT / "src" / directory / name
+        staged = PREFIX / "include/iiVisualCodec" / name
         assert digest(source) == digest(staged), name
         report["headers"][name] = digest(staged)
     report["archive_objects"] = {}

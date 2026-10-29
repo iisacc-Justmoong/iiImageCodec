@@ -14,13 +14,35 @@ find_package(JPEG REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(WebP 1 CONFIG REQUIRED)
 find_package(TIFF 4.5 REQUIRED)
+set(_visual_public_headers
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Core/VisualCodec.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Image/ImageCodec.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Spatial/Spatial.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Video/VideoCodec.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/USD/UsdCodec.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Vision/Vision.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Vision/OpenCV.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Vision/OpenCVBridge.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Geometry/Geometry.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/Asset3D/Asset3D.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/CAD/CadCodec.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/USD/UsdGeometry.h"
+)
+foreach(_header IN LISTS _visual_public_headers)
+    get_filename_component(_name "${_header}" NAME)
+    file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/include/iiVisualCodec/${_name}"
+        CONTENT "#pragma once\n#include \"${_header}\"\n")
+endforeach()
+file(GENERATE OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/include/iiImageCodec/ImageCodec.h"
+    CONTENT "#pragma once\n#include \"${CMAKE_CURRENT_SOURCE_DIR}/src/Compatibility/ImageCodec.h\"\n")
 function(visual_library target component)
     add_library(${target} STATIC ${ARGN})
     add_library(iiVisualCodec::${component} ALIAS ${target})
     target_compile_features(${target} PUBLIC cxx_std_23)
     target_include_directories(${target} PUBLIC
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
-        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
+        $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+        PRIVATE src/Core src/Image)
     set_target_properties(${target} PROPERTIES POSITION_INDEPENDENT_CODE ON CXX_EXTENSIONS OFF EXPORT_NAME ${component})
     if(IIVISUALCODEC_SANITIZE AND CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
         target_compile_options(${target} PUBLIC -fsanitize=address,undefined -fno-omit-frame-pointer)
@@ -29,60 +51,60 @@ function(visual_library target component)
     install(TARGETS ${target} EXPORT iiVisualCodec${component}Targets ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
     install(EXPORT iiVisualCodec${component}Targets NAMESPACE iiVisualCodec:: DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiVisualCodec)
 endfunction()
-visual_library(iiVisualCodecImage Image src/iiVisualCodec/ImageCodec.cpp src/iiVisualCodec/Jpeg.c
-    src/iiVisualCodec/Extended.cpp src/iiVisualCodec/Metadata.cpp src/iiVisualCodec/Thumbnail.cpp)
+visual_library(iiVisualCodecImage Image src/Image/ImageCodec.cpp src/Image/Jpeg.c
+    src/Image/Extended.cpp src/Image/Metadata.cpp src/Image/Thumbnail.cpp)
 if(APPLE)
-    target_sources(iiVisualCodecImage PRIVATE src/iiVisualCodec/ColorMac.cpp)
+    target_sources(iiVisualCodecImage PRIVATE src/Image/ColorMac.cpp)
     target_link_libraries(iiVisualCodecImage PRIVATE "-framework CoreGraphics" "-framework CoreFoundation")
 elseif(WIN32)
-    target_sources(iiVisualCodecImage PRIVATE src/iiVisualCodec/ColorWindows.cpp)
+    target_sources(iiVisualCodecImage PRIVATE src/Image/ColorWindows.cpp)
     target_link_libraries(iiVisualCodecImage PRIVATE windowscodecs ole32)
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux" AND NOT ANDROID)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(ColorManagement REQUIRED IMPORTED_TARGET lcms2)
-    target_sources(iiVisualCodecImage PRIVATE src/iiVisualCodec/ColorLinux.cpp)
+    target_sources(iiVisualCodecImage PRIVATE src/Image/ColorLinux.cpp)
     target_link_libraries(iiVisualCodecImage PRIVATE PkgConfig::ColorManagement)
 else()
-    target_sources(iiVisualCodecImage PRIVATE src/iiVisualCodec/ColorUnsupported.cpp)
+    target_sources(iiVisualCodecImage PRIVATE src/Image/ColorUnsupported.cpp)
 endif()
 target_link_libraries(iiVisualCodecImage PRIVATE PNG::PNG JPEG::JPEG TIFF::TIFF ZLIB::ZLIB WebP::webp)
 target_include_directories(iiVisualCodecImage PRIVATE third_party/stb)
-visual_library(iiVisualCodecSpatial Spatial src/iiVisualCodec/Spatial.cpp)
+visual_library(iiVisualCodecSpatial Spatial src/Spatial/Spatial.cpp)
 target_link_libraries(iiVisualCodecSpatial PUBLIC iiVisualCodec::Image)
-visual_library(iiVisualCodecVision Vision src/iiVisualCodec/Vision.cpp)
+visual_library(iiVisualCodecVision Vision src/Vision/Vision.cpp)
 target_link_libraries(iiVisualCodecVision PUBLIC iiVisualCodec::Image)
-visual_library(iiVisualCodecGeometry Geometry src/iiVisualCodec/Geometry.cpp)
+visual_library(iiVisualCodecGeometry Geometry src/Geometry/Geometry.cpp)
 target_link_libraries(iiVisualCodecGeometry PUBLIC iiVisualCodec::Image)
 set(IIVISUALCODEC_COMPONENTS Image Spatial Vision Geometry)
 if(IIVISUALCODEC_3D)
     find_package(assimp 6 CONFIG REQUIRED)
-    visual_library(iiVisualCodecAsset3D Asset3D src/iiVisualCodec/Asset3D.cpp)
+    visual_library(iiVisualCodecAsset3D Asset3D src/Asset3D/Asset3D.cpp)
     target_link_libraries(iiVisualCodecAsset3D PUBLIC iiVisualCodec::Geometry PRIVATE assimp::assimp)
     list(APPEND IIVISUALCODEC_COMPONENTS Asset3D)
 endif()
 if(IIVISUALCODEC_CAD)
     find_package(OpenCASCADE 8.0.1 EXACT CONFIG REQUIRED COMPONENTS FoundationClasses ModelingData ModelingAlgorithms Visualization ApplicationFramework DataExchange)
-    visual_library(iiVisualCodecCAD CAD src/iiVisualCodec/CadCodec.cpp)
+    visual_library(iiVisualCodecCAD CAD src/CAD/CadCodec.cpp)
     target_include_directories(iiVisualCodecCAD SYSTEM PRIVATE ${OpenCASCADE_INCLUDE_DIR})
     target_link_libraries(iiVisualCodecCAD PUBLIC iiVisualCodec::Geometry PRIVATE TKDESTEP TKDEIGES TKMesh TKPrim TKBO TKTopAlgo TKShHealing)
     list(APPEND IIVISUALCODEC_COMPONENTS CAD)
 endif()
 if(IIVISUALCODEC_OPENCV)
     find_package(OpenCV 4.14 CONFIG REQUIRED COMPONENTS core imgproc features2d video)
-    visual_library(iiVisualCodecOpenCV OpenCV src/iiVisualCodec/OpenCV.cpp)
+    visual_library(iiVisualCodecOpenCV OpenCV src/Vision/OpenCV.cpp)
     target_link_libraries(iiVisualCodecOpenCV PUBLIC iiVisualCodec::Vision ${OpenCV_LIBS})
     list(APPEND IIVISUALCODEC_COMPONENTS OpenCV)
 endif()
 if(IIVISUALCODEC_VIDEO)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(VisualFFmpeg REQUIRED IMPORTED_TARGET libavformat>=62 libavcodec>=62 libavutil>=60 libswscale>=9)
-    visual_library(iiVisualCodecVideo Video src/iiVisualCodec/VideoCodec.cpp)
+    visual_library(iiVisualCodecVideo Video src/Video/VideoCodec.cpp)
     target_link_libraries(iiVisualCodecVideo PUBLIC iiVisualCodec::Spatial PRIVATE PkgConfig::VisualFFmpeg)
     list(APPEND IIVISUALCODEC_COMPONENTS Video)
 endif()
 if(IIVISUALCODEC_USD)
     find_package(pxr CONFIG REQUIRED)
-    visual_library(iiVisualCodecUSD USD src/iiVisualCodec/UsdCodec.cpp src/iiVisualCodec/UsdGeometry.cpp)
+    visual_library(iiVisualCodecUSD USD src/USD/UsdCodec.cpp src/USD/UsdGeometry.cpp)
     target_link_libraries(iiVisualCodecUSD PUBLIC iiVisualCodec::Spatial iiVisualCodec::Geometry PRIVATE usd usdGeom usdShade usdUtils)
     list(APPEND IIVISUALCODEC_COMPONENTS USD)
 endif()
@@ -95,6 +117,8 @@ add_library(iiImageCodec INTERFACE)
 add_library(iiImageCodec::iiImageCodec ALIAS iiImageCodec)
 target_link_libraries(iiImageCodec INTERFACE iiVisualCodec::Image)
 if(BUILD_TESTING)
+    add_test(NAME iiVisualCodec.source_layout COMMAND ${CMAKE_COMMAND}
+        "-DSOURCE_ROOT=${CMAKE_CURRENT_SOURCE_DIR}" -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/source_layout.cmake")
     foreach(contract IN ITEMS contracts color thumbnail spatial)
         add_executable(iiVisualCodec_${contract} tests/${contract}.cpp)
         target_link_libraries(iiVisualCodec_${contract} PRIVATE iiVisualCodec::Spatial)
@@ -153,11 +177,8 @@ if(BUILD_TESTING)
         add_test(NAME iiVisualCodec.dependencies COMMAND "${Python3_EXECUTABLE}" -B "${CMAKE_CURRENT_SOURCE_DIR}/tests/dependencies.py")
     endif()
 endif()
-install(FILES src/iiVisualCodec/VisualCodec.h src/iiVisualCodec/ImageCodec.h src/iiVisualCodec/Spatial.h
-    src/iiVisualCodec/VideoCodec.h src/iiVisualCodec/UsdCodec.h src/iiVisualCodec/Vision.h
-    src/iiVisualCodec/OpenCV.h src/iiVisualCodec/OpenCVBridge.h src/iiVisualCodec/Geometry.h
-    src/iiVisualCodec/Asset3D.h src/iiVisualCodec/CadCodec.h src/iiVisualCodec/UsdGeometry.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiVisualCodec)
-install(FILES src/iiImageCodec/ImageCodec.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiImageCodec)
+install(FILES ${_visual_public_headers} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiVisualCodec)
+install(FILES src/Compatibility/ImageCodec.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/iiImageCodec)
 configure_package_config_file(cmake/iiVisualCodecConfig.cmake.in "${CMAKE_CURRENT_BINARY_DIR}/iiVisualCodecConfig.cmake"
     INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/iiVisualCodec)
 write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/iiVisualCodecConfigVersion.cmake"

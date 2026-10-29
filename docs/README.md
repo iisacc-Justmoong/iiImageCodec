@@ -19,6 +19,7 @@ Markdown is the maintained human source. Agent JSON is a structured, source-trac
 | [`docs/OpenCV.md`](OpenCV.md) | [JSON](OpenCV.agent.json) |
 | [`docs/Packaging.md`](Packaging.md) | [JSON](Packaging.agent.json) |
 | [`docs/RuntimeRetirement.md`](RuntimeRetirement.md) | [JSON](RuntimeRetirement.agent.json) |
+| [`docs/SourceLayout.md`](SourceLayout.md) | [JSON](SourceLayout.agent.json) |
 | [`docs/Spatial.md`](Spatial.md) | [JSON](Spatial.agent.json) |
 | [`docs/Thumbnails.md`](Thumbnails.md) | [JSON](Thumbnails.agent.json) |
 | [`docs/USD.md`](USD.md) | [JSON](USD.agent.json) |

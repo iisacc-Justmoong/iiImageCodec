@@ -1,0 +1,11 @@
+#pragma once
+#include <iiVisualCodec/ImageCodec.h>
+#include <iiVisualCodec/Spatial.h>
+#include <iiVisualCodec/VideoCodec.h>
+#include <iiVisualCodec/UsdCodec.h>
+#include <iiVisualCodec/Vision.h>
+#include <iiVisualCodec/OpenCV.h>
+#include <iiVisualCodec/Geometry.h>
+#include <iiVisualCodec/Asset3D.h>
+#include <iiVisualCodec/CadCodec.h>
+#include <iiVisualCodec/UsdGeometry.h>

@@ -1,6 +1,6 @@
 #pragma once
-#include "Geometry.h"
-#include "UsdCodec.h"
+#include <iiVisualCodec/Geometry.h>
+#include <iiVisualCodec/UsdCodec.h>
 
 namespace ii::visual::usd {
 // Bake a static scene into a new metre/+Y stage. USD's float mesh representation

@@ -1,7 +1,7 @@
 #pragma once
 // Explicit native interop boundary; ordinary Vision/OpenCV headers use only
 // standard C++ values. Link iiVisualCodec::OpenCV before including this header.
-#include "OpenCV.h"
+#include <iiVisualCodec/OpenCV.h>
 #include <opencv2/core/mat.hpp>
 
 namespace ii::visual::opencv {
